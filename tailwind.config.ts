@@ -13,8 +13,10 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      textColor: {
-        'purple' : '948EFF',
+      colors: {
+        purple : {
+          1000: '6C63FF',
+        },
       },
     },
   },

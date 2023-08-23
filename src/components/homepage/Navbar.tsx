@@ -5,7 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { Button } from "@/components/ui/Button"
-import ScrollLink from './ui/ScrollLink';
+import ScrollLink from '@/components/ui/ScrollLink';
+import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
   const [show, setShow] = useState(true);
@@ -38,15 +39,16 @@ const Navbar = () => {
 
   return (
     <div className='flex justify-between mx-10 my-5'>
-        <div className='px-8'>
+        <div className='lg:px-8'>
           <Link href={"/"}>
               <Image
                   priority
                   width="100"
                   height="140"
                   quality={100}
-                  src="logo.svg"
+                  src="logo1.svg"
                   alt="Logo"
+                  className='pt-1'
               />
           </Link>
         </div>
@@ -65,12 +67,15 @@ const Navbar = () => {
           </Button>
         </div>
         <div className=' hidden lg:flex lg:gap-x-5'>
-          <Button variant="outline" className='px-8 '>
+          <Button variant="outline" className='px-8'>
             <Link href="/">Login</Link>
           </Button>
           <Button variant="default" className='px-8'>
             <Link href="/">Sign up</Link>
           </Button>
+        </div>
+        <div className='flex-center place-content-end'>
+          <MobileMenu/>
         </div>
     </div>
   )
