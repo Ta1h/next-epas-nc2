@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <div className='flex justify-between mx-10 my-5'>
-        <div className='lg:px-8'>
+        <div className=' lg:px-8'>
           <Link href={"/"}>
               <Image
                   priority

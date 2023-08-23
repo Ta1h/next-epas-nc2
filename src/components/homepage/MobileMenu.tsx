@@ -56,7 +56,7 @@ const MobileNav: FC<MobileNavProps> = ({}) => {
                   className={cn("", pathname === route.href)}
                 >
                   <SheetClose>
-                    <Button variant="link">{route.label}</Button>
+                    <Button className='text-xl'variant="link">{route.label}</Button>
                   </SheetClose>
                 </ScrollLink>
               ))}
