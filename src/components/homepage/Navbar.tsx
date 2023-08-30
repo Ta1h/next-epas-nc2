@@ -68,10 +68,10 @@ const Navbar = () => {
         </div>
         <div className=' hidden lg:flex lg:gap-x-5'>
           <Button variant="outline" className='px-8'>
-            <Link href="/">Login</Link>
+            <Link href="/login">Login</Link>
           </Button>
           <Button variant="default" className='px-8'>
-            <Link href="/">Sign up</Link>
+            <Link href="/signup">Sign up</Link>
           </Button>
         </div>
         <div className='flex-center place-content-end'>
