@@ -19,15 +19,15 @@ const page = () => {
             quality={100}
             src="login-ellipse.svg"
             alt="ellipse"
-            className='fixed mb-28'
+            className='mb-4'
           />
-          <div className='text-white w-64 text-center space-y-3 mt-80'>
+          <div className='text-white w-64 text-center space-y-3'>
             <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>
             <p className='text-xs'>Learn EPAS in 3D products and pass the National Certificate examination.</p>
           </div>
       </div>
 
-      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center space-y-12'>
+      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center md:space-y-8 space-y-12'>
         <Image
           priority
           width="80"

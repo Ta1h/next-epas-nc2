@@ -45,9 +45,9 @@ const page = () => {
             quality={100}
             src="signup-ellipse.svg"
             alt="ellipse"
-            className='fixed mb-28'
+            className='object-contain mb-4'
           />
-          <div className='text-white w-64 text-center space-y-3 mt-72'>
+          <div className='text-white w-64 text-center space-y-3'>
             <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>
             <p className='text-xs'>Learn EPAS in 3D products and pass the National Certificate examination.</p>
           </div>
