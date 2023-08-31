@@ -40,12 +40,12 @@ const page = () => {
       <div className='hidden lg:w-2/6 lg:h-5/6 lg:bg-purple-700 lg:rounded-r-lg lg:flex lg:flex-col lg:justify-center lg:items-center'>
         <Image
             priority
-            width="347"
+            width="147"
             height="222"
             quality={100}
             src="signup-ellipse.svg"
             alt="ellipse"
-            className='object-contain mb-4'
+            className='mb-4 lg:w-96'
           />
           <div className='text-white w-64 text-center space-y-3'>
             <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>

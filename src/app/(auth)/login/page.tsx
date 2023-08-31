@@ -5,29 +5,41 @@ import Link from 'next/link'
 import {FcGoogle} from "react-icons/fc"
 import { Input } from "@/components/ui/Input"
 import { Button } from '@/components/ui/Button'
+import Icons from '@/components/ui/Icons'
 
 
 const page = () => {
   return (
     <div className='w-screen h-screen flex flex-row justify-center items-center'>
-      
-      <div className='hidden lg:w-2/6 lg:h-5/6 lg:bg-purple-700 lg:rounded-l-lg lg:flex lg:flex-col lg:justify-center lg:items-center'>
-        <Image
-            priority
-            width="347"
-            height="222"
-            quality={100}
-            src="login-ellipse.svg"
-            alt="ellipse"
-            className='mb-4'
-          />
-          <div className='text-white w-64 text-center space-y-3'>
-            <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>
-            <p className='text-xs'>Learn EPAS in 3D products and pass the National Certificate examination.</p>
-          </div>
+      <div className='hidden lg:w-2/6 lg:h-5/6 lg:bg-purple-700 lg:rounded-l-lg lg:flex lg:flex-col lg:justify-center lg:items-center space-y-3'>
+        <div className='text-white items-start -mt-14 w-full pl-10'>
+          <Button variant='ghost'>
+            <Link href='/'><Icons.ChevronLeft className='w-8 h-8'/></Link>
+          </Button>
+        </div>
+        <div className='w-full flex justify-center'>
+          <Image
+              priority
+              width="147"
+              height="222"
+              quality={100}
+              src="login-ellipse.svg"
+              alt="ellipse"
+              className='lg:w-96 w-auto'
+            />
+        </div>
+        <div className='text-white w-64 text-center space-y-3'>
+          <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>
+          <p className='text-xs'>Learn EPAS in 3D products and pass the National Certificate examination.</p>
+        </div>
       </div>
 
-      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center md:space-y-8 space-y-12'>
+      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center space-y-12'>
+        <div className='lg:hidden text-purple-700 items-start w-full pl-16 lg:pl-10'>
+          <Button variant='ghost'>
+            <Link href='/'><Icons.ChevronLeft className='w-8 h-8'/></Link>
+          </Button>
+        </div>
         <Image
           priority
           width="80"
