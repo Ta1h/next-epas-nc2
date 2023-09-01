@@ -12,11 +12,6 @@ const page = () => {
   return (
     <div className='w-screen h-screen flex flex-row justify-center items-center'>
       <div className='hidden lg:w-2/6 lg:h-5/6 lg:bg-purple-700 lg:rounded-l-lg lg:flex lg:flex-col lg:justify-center lg:items-center space-y-3'>
-        <div className='text-white items-start -mt-14 w-full pl-10'>
-          <Button variant='ghost'>
-            <Link href='/'><Icons.ChevronLeft className='w-8 h-8'/></Link>
-          </Button>
-        </div>
         <div className='w-full flex justify-center'>
           <Image
               priority
@@ -35,20 +30,16 @@ const page = () => {
       </div>
 
       <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center space-y-12'>
-        <div className='lg:hidden text-purple-700 items-start w-full pl-16 lg:pl-10'>
-          <Button variant='ghost'>
-            <Link href='/'><Icons.ChevronLeft className='w-8 h-8'/></Link>
-          </Button>
+        <div className='pt-1 mb-4'>
+          <Image
+            priority
+            width="80"
+            height="110"
+            quality={100}
+            src="logo1.svg"
+            alt="Logo"
+          />
         </div>
-        <Image
-          priority
-          width="80"
-          height="110"
-          quality={100}
-          src="logo1.svg"
-          alt="Logo"
-          className='pt-1 mb-4'
-        />
         <div className='text-center w-72'>
           <h1 className='font-bold text-xl'>Hello again!</h1>
           <p className='text-sm text-gray-400 '>Welcome to our website, and remember to work hard while still having fun.</p>
