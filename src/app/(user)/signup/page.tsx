@@ -48,7 +48,7 @@ const page = () => {
             className='mb-4 lg:w-96'
           />
           <div className='text-white w-64 text-center space-y-3'>
-            <h1 className='font-semibold'>We're here to assist you in learning easily!</h1>
+            <h1 className='font-semibold'>We&apos;re here to assist you in learning easily!</h1>
             <p className='text-xs'>Learn EPAS in 3D products and pass the National Certificate examination.</p>
           </div>
       </div>
