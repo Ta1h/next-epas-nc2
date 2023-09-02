@@ -15,6 +15,7 @@ const page = () => {
         <div className='w-full flex justify-center'>
           <Image
               priority
+              layout='intrisic'
               width="147"
               height="222"
               quality={100}
@@ -29,7 +30,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center space-y-12'>
+      <div className='w-screen h-screen lg:w-2/6 lg:h-5/6 border-gray-300 border rounded-r-lg flex flex-col justify-center items-center space-y-12 lg:space-y-8'>
         <div className='pt-1 mb-4'>
           <Image
             priority
@@ -41,8 +42,8 @@ const page = () => {
           />
         </div>
         <div className='text-center w-72'>
-          <h1 className='font-bold text-xl'>Hello again!</h1>
-          <p className='text-sm text-gray-400 '>Welcome to our website, and remember to work hard while still having fun.</p>
+          <h1 className='font-bold text-xl lg:text-lg'>Hello again!</h1>
+          <p className='text-sm text-gray-400 lg:text-xs'>Welcome to our website, and remember to work hard while still having fun.</p>
         </div>
         <div className='flex-col space-y-4'>
           <Input type="email" placeholder="Email" />

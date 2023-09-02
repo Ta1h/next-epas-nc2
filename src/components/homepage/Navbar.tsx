@@ -38,8 +38,8 @@ const Navbar = () => {
   }, [controlNavbar, lastScrollY]);
 
   return (
-    <div className='flex justify-between mx-10 my-5'>
-        <div className=' lg:px-8'>
+    <div className='flex justify-between my-5 mx-7 md:mx-9 lg:mx-8 xl:mx-20 xl:mt-8 2xl:mx-24 2xl:mt-9'>
+        <div className='lg:px-8'>
           <Link href={"/"}>
               <Image
                   priority
@@ -52,7 +52,7 @@ const Navbar = () => {
               />
           </Link>
         </div>
-        <div className="flex-auto hidden z-50 lg:flex lg:justify-center lg:gap-x-12">
+        <div className="flex-auto hidden z-50 lg:flex lg:justify-center lg:gap-x-8">
           <Button variant="link">
             <Link href="/">Home</Link>
           </Button>
