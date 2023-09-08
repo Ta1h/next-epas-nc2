@@ -66,7 +66,7 @@ const Navbar = () => {
             <ScrollLink href="#contacts">Contacts</ScrollLink>
           </Button>
         </div>
-        <div className=' hidden lg:flex lg:gap-x-5'>
+        <div className=' hidden z-50 lg:flex lg:gap-x-5'>
           <Button variant="outline" className='px-8'>
             <Link href="/login">Login</Link>
           </Button>
