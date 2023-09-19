@@ -14,6 +14,7 @@ import {
     Users,
     Library,
     Settings,
+    MoreVertical,
   } from "lucide-react";
   
   export const Icons = {
@@ -32,6 +33,7 @@ import {
     Users,
     Library,
     Settings,
+    MoreVertical,
   };
   
   export default Icons;
