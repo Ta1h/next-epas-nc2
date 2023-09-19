@@ -11,8 +11,10 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
 import { useForm } from 'react-hook-form';
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from 'next/navigation';
 
 const SignUpForm = () => {
+    const router = useRouter();
     const FormSchema = z.object({
         username: z.string().min(2, {
             message: "Username must be at least 2 characters.",
@@ -36,8 +38,24 @@ const SignUpForm = () => {
         },
       });
 
-    const onSubmit = (values:z.infer<typeof FormSchema>) => {
-        console.log(values);
+    const onSubmit = async (values:z.infer<typeof FormSchema>) => {
+        const response = await fetch('/api/post',{
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: values.username,
+                email: values.email,
+                password: values.password,
+            })
+        });
+
+        if(response.ok){
+            router.push('/signin');
+        }else{
+            console.error('Registration failed');
+        }
     }
 
   return (
