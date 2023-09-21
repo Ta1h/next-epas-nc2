@@ -39,15 +39,13 @@ const SignInForm = () => {
             email: values.email,
             password: values.password,
           });
-          console.log('inside');
           if(signInData?.error){
             console.log(signInData.error);
           }else {
-            console.log('success');
+            router.refresh();
             router.push('/userDashboard');
           }
         }catch(error){
-          console.log('error');
           console.error();
         }
     };
