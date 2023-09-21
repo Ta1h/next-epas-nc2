@@ -4,7 +4,6 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {FcGoogle} from "react-icons/fc"
 import { Input } from "@/components/ui/Input"
 import { Button } from '@/components/ui/Button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
@@ -39,24 +38,29 @@ const SignUpForm = () => {
       });
 
     const onSubmit = async (values:z.infer<typeof FormSchema>) => {
-        const response = await fetch('/api/post',{
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: values.username,
-                email: values.email,
-                password: values.password,
-            })
-        });
-
-        if(response.ok){
-            router.push('/signin');
-        }else{
-            console.error('Registration failed');
+        try{
+            const response = await fetch('/api/post',{
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: values.username,
+                    email: values.email,
+                    password: values.password,
+                })
+            });
+    
+            if(response.ok){
+                router.push('signin');
+            }else{
+                const responseData = await response.json();
+                console.error('Registration failed:', responseData.message);
+            }
+        }catch(error){
+            console.error('Network error', error);
         }
-    }
+    };
 
   return (
     <div className='w-screen h-screen flex flex-row justify-center items-center'>
@@ -135,7 +139,7 @@ const SignUpForm = () => {
 
         <div className='flex'>
           <p className='text-xs text-gray-400'> Already have an account?</p>
-          <Link href="/signin"><p className='text-xs text-purple-700 ml-2'>Sign in</p></Link>
+          <Link href="api/auth/signin"><p className='text-xs text-purple-700 ml-2'>Sign in</p></Link>
         </div>
       </div>
       

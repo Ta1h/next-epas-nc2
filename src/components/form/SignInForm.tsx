@@ -12,14 +12,17 @@ import { useForm } from 'react-hook-form'
 import { Form, FormField, FormItem, FormControl, FormMessage } from '../ui/form'
 import * as z from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
-import GoogleSignInButton from '../GoogleSignInButton';
+import GoogleSignInButton from '../GoogleSignInButton'
+import { signIn } from "next-auth/react"
+import { useRouter } from 'next/navigation';
+
 
 
 const SignInForm = () => {
-
+    const router = useRouter();
     const FormSchema = z.object({
-        email: z.string().min(1, 'Email is required').email('Invalid email'),
-        password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
+      email: z.string().min(1, 'Email is required').email('Invalid email'),
+      password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
     })
     
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -30,9 +33,21 @@ const SignInForm = () => {
         },
       });
 
-    const onSubmit = (values:z.infer<typeof FormSchema>) => {
-        console.log(values);
-    }
+    const onSubmit = async (values:z.infer<typeof FormSchema>) => {
+        try{
+          const signInData = await signIn('credentials', {
+            email: values.email,
+            password: values.password,
+          });
+          if(signInData?.error){
+            console.log(signInData.error);
+          }else {
+            router.push('/userDashboard');
+          }
+        }catch(error){
+          console.error();
+        }
+    };
 
   return (
     <div className='w-screen h-screen flex flex-row justify-center items-center'>
@@ -111,9 +126,6 @@ const SignInForm = () => {
                 </div>
             </form>
         </Form>
-
-        
-
 
         <div className='flex'>
           <p className='text-xs text-gray-400'> Don&apos;t have an account yet?</p>

@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
         <div className=' hidden z-50 lg:flex lg:gap-x-5'>
           <Button variant="outline" className='px-8'>
-            <Link href="/signin">Sign in</Link>
+            <Link href="signin">Sign in</Link>
           </Button>
           <Button variant="default" className='px-8'>
             <Link href="/signup">Sign up</Link>
