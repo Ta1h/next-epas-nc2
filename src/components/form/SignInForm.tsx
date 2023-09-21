@@ -26,12 +26,12 @@ const SignInForm = () => {
     })
     
     const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
-        defaultValues: {
-            email: '',
-            password: '',
-        },
-      });
+      resolver: zodResolver(FormSchema),
+      defaultValues: {
+        email: '',
+        password: '',
+      },
+    });
 
     const onSubmit = async (values:z.infer<typeof FormSchema>) => {
         try{
@@ -39,12 +39,15 @@ const SignInForm = () => {
             email: values.email,
             password: values.password,
           });
+          console.log('inside');
           if(signInData?.error){
             console.log(signInData.error);
           }else {
+            console.log('success');
             router.push('/userDashboard');
           }
         }catch(error){
+          console.log('error');
           console.error();
         }
     };

@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions= {
             password: { label: "Password", type: "password" }
           },
 
-          async authorize(credentials, req) {
+          async authorize(credentials) {
             if(!credentials?.email || !credentials?.password){
                 return null;
             }
@@ -48,16 +48,6 @@ export const authOptions: NextAuthOptions= {
     },
     pages: {
         signIn: '/signin',
-        signOut: '/signup',
     },
-    secret: process.env.NEXTAUTH_URL,
-    
-    callbacks: {
-        async jwt({ token, user, account, profile, isNewUser }) {
-            return token
-        },
-        async session({ session, user, token }) {
-            return session
-        },
-    }
+    secret: process.env.NEXTAUTH_SECRET,
 }
