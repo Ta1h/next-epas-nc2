@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { hash } from 'bcrypt';
 import * as z from 'zod'
+import { Prisma } from "@prisma/client";
 
 const userSchema = z.object({
     username: z.string().min(1, 'Username is required').max(100),
@@ -50,6 +51,13 @@ export async function POST(req: Request) {
         return NextResponse.json({user: rest, message: 'user created succesfully'}, {status: 201});
 
     } catch (error) {
-        return NextResponse.json({message: "Something went wrong.."}, {status : 500});
+        console.error(error);
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                return NextResponse.json({ message: "Duplicate entry" }, { status: 400 });
+            }
+            // Handle other Prisma errors as needed.
+        }
+        return NextResponse.json({ message: "Something went wrong" }, { status: 500 });
     }
 }

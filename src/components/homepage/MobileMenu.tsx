@@ -61,7 +61,7 @@ const MobileNav: FC<MobileNavProps> = ({}) => {
                 </ScrollLink>
               ))}
               <Button>
-                <Link href="/login">Log In</Link>
+                <Link href="/signin">Sign In</Link>
               </Button>
             </div>
           </div>

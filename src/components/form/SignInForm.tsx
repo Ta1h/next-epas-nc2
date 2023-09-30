@@ -13,13 +13,13 @@ import { Form, FormField, FormItem, FormControl, FormMessage } from '../ui/form'
 import * as z from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
 import GoogleSignInButton from '../GoogleSignInButton'
-import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
-
+import { signIn, useSession } from "next-auth/react";
 
 
 const SignInForm = () => {
     const router = useRouter();
+    const {data: session} = useSession();
     const FormSchema = z.object({
       email: z.string().min(1, 'Email is required').email('Invalid email'),
       password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
@@ -33,22 +33,30 @@ const SignInForm = () => {
       },
     });
 
-    const onSubmit = async (values:z.infer<typeof FormSchema>) => {
-        try{
-          const signInData = await signIn('credentials', {
-            email: values.email,
-            password: values.password,
-          });
-          if(signInData?.error){
-            console.log(signInData.error);
-          }else {
-            router.refresh();
-            router.push('/userDashboard');
-          }
-        }catch(error){
-          console.error();
+    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+      try {
+        // Attempt to sign in with the 'credentials' provider
+        const signInData = await signIn('credentials', {
+          email: values.email,
+          password: values.password,
+        });
+    
+        // Check if there was an error during sign-in
+        if (signInData?.error) {
+          console.log(signInData.error); // Log the specific error details
+        } else if (session?.user) {
+          // If the sign-in was successful and a user session exists
+          router.push('./userDashboard'); // Redirect the user to the '/userDashboard' page
+          router.refresh(); // Refresh the router to ensure the updated session state
+        } else {
+          // If the sign-in was not successful and no user session exists
+          console.log(session); // Log the current session (if available)
+          console.error('Sign-in failed'); // Log an error message indicating sign-in failure
         }
-    };
+      } catch (error) {
+        console.error('An error occurred during sign-in:', error); // Log any unexpected errors
+      }
+    };    
 
   return (
     <div className='w-screen h-screen flex flex-row justify-center items-center'>
@@ -91,7 +99,7 @@ const SignInForm = () => {
         </div>
 
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/4 space-y-5 flex flex-col justify-center items-center">
+            <form method="POST" onSubmit={form.handleSubmit(onSubmit)} className="w-2/4 space-y-5 flex flex-col justify-center items-center">
                 <FormField
                     control={form.control}
                     name="email"
@@ -118,15 +126,18 @@ const SignInForm = () => {
                 />
                 <div className='flex flex-col space-y-3 w-64'>
                     <Button variant="default">
-                        <Link href="" className='text-sm'>sign in</Link>
+                      sign in
                     </Button>
-                    <GoogleSignInButton>
-                        <FcGoogle/>
-                        Sign in with Google
-                    </GoogleSignInButton>
                 </div>
             </form>
         </Form>
+
+        <div>
+          <GoogleSignInButton>
+            <FcGoogle/>
+            Sign in with Google
+          </GoogleSignInButton>
+        </div>
 
         <div className='flex'>
           <p className='text-xs text-gray-400'> Don&apos;t have an account yet?</p>

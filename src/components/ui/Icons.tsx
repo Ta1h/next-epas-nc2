@@ -1,4 +1,6 @@
 import {
+    Book,
+    BarChart4,
     ChevronLeft,
     ChevronRight,
     ChevronsDown,
@@ -18,6 +20,8 @@ import {
   } from "lucide-react";
   
   export const Icons = {
+    Book,
+    BarChart4,
     ChevronLeft,
     ChevronRight,
     ChevronsDown,
