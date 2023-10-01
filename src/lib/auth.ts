@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions= {
             // Check if email or password is missing in credentials
             if (!credentials?.email || !credentials?.password) {
               // Return null to indicate authentication failure due to incomplete credentials
-              return null;
+              throw new Error('email or password is missing in credentials');
             }
           
             // Attempt to find a user with the provided email using Prisma
@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions= {
             // If no user with the provided email is found
             if (!existingUser) {
               // Return null to indicate authentication failure due to an unknown email
-              return null;
+              throw new Error('user email is not found');
             }
           
             // If the user's password is stored securely, compare the provided password
@@ -54,7 +54,6 @@ export const authOptions: NextAuthOptions= {
               if (!passwordMatch) {
                 // Return null to indicate authentication failure due to an incorrect password
                 throw new Error('password don&apost match');
-                return null
               }
             }
           

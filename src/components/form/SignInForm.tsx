@@ -44,14 +44,8 @@ const SignInForm = () => {
         // Check if there was an error during sign-in
         if (signInData?.error) {
           console.log(signInData.error); // Log the specific error details
-        } else if (session?.user) {
-          // If the sign-in was successful and a user session exists
-          router.push('./userDashboard'); // Redirect the user to the '/userDashboard' page
-          router.refresh(); // Refresh the router to ensure the updated session state
         } else {
-          // If the sign-in was not successful and no user session exists
-          console.log(session); // Log the current session (if available)
-          console.error('Sign-in failed'); // Log an error message indicating sign-in failure
+          router.push('/userDashboard'); // Redirect the user to the '/userDashboard' page
         }
       } catch (error) {
         console.error('An error occurred during sign-in:', error); // Log any unexpected errors
