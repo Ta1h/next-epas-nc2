@@ -10,9 +10,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/
 import { usePathname } from 'next/navigation';
 import { Ghost, MoreVertical } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 
-const UserSidebar = () => {
+const UserSidebar =  async () => {
   const pathname = usePathname();
 
   return (

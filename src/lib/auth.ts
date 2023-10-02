@@ -4,7 +4,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "./prisma";
 import { compare } from "bcrypt";
-import { error } from 'console';
 
 export const authOptions: NextAuthOptions= {
     adapter: PrismaAdapter(prisma),
@@ -13,6 +12,7 @@ export const authOptions: NextAuthOptions= {
     },
     pages: {
         signIn: '/signin',
+        signOut: '/signin',
     },
     providers: [
         CredentialsProvider({

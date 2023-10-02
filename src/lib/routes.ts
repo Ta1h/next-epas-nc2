@@ -35,18 +35,23 @@ export const adminRoutes = [
       href: "/adminDashboard",
     },
     {
-      label: "Lesson",
+      label: "Users",
+      icon: Icons.Users2,
+      href: "/adminDashboard/users",
+    },
+    {
+      label: "Lessons",
       icon: Icons.Book,
-      href: "/adminDashboard/lesson",
+      href: "/adminDashboard/lessons",
     },
     {
-      label: "Assessment",
+      label: "Assessments",
       icon: Icons.FileText,
-      href: "/adminDashboard/assessment",
+      href: "/adminDashboard/assessments",
     },
     {
-      label: "Score",
+      label: "Top Scores",
       icon: Icons.BarChart4,
-      href: "/adminDashboard/score",
+      href: "/adminDashboard/scores",
     },
 ];

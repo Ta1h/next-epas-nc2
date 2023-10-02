@@ -18,9 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body className='flex flex-row'>
-        <aside>
-          <AdminSidebar/>
-        </aside>
         <main>
           {children}
         </main>
