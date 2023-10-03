@@ -1,4 +1,6 @@
+import Provider from '@/components/Provider'
 import AdminSidebar from '@/components/sidebar/AdminSidebar'
+import AdminNavbar from '@/components/navbar/AdminNavbar'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -17,14 +19,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-        <body className='relative h-full'>
-            <aside className='z-80 hidden h-full bg-background md:fixed md:inset-y-0 md:flex md:w-20 md:flex-col lg:w-64'>
+        <Provider>
+          <body className='relative h-full'>
+              <aside className='z-80 hidden h-full bg-background md:fixed md:inset-y-0 md:flex md:w-20 md:flex-col lg:w-64'>
                 <AdminSidebar/>
-            </aside>
-            <main className="bg-background pb-10 md:pl-20 lg:pl-60">
-                {children}  
-            </main>
-        </body>
+              </aside>
+              <nav>
+                <AdminNavbar/>
+              </nav>
+              <main className="bg-background pb-10 md:pl-20 lg:pl-60">
+                {children}
+              </main>
+          </body>
+        </Provider>
     </html>
   )
 }

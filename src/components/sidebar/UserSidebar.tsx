@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,17 +12,21 @@ import { Ghost, MoreVertical } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { useSession } from 'next-auth/react';
 
 
-const UserSidebar =  async () => {
+const UserSidebar = () => {
+  const { data: session} = useSession();
   const pathname = usePathname();
+  
+  console.log(session)
 
   return (
-    <div className="border-r shadow lg:w-60">
+    <div className="border-r shadow lg:w-56">
       <div className="px-3 py-2 flex-1 justify-between h-screen">
         <Link href="/admin" className="flex items-center mb-14">
           <div className="relative pt-5 pl-5 w-full ">
-            <Image priority width={100} height={100} alt="Logo" src="logo1.svg" />
+            <Image priority width={100} height={100} alt="Logo" src="/logo1.svg" />
           </div>
         </Link>
         <div className="space-y-1 lg:space-y-4">
@@ -61,18 +65,6 @@ const UserSidebar =  async () => {
             ))}
           </TooltipProvider>
         </div>
-      <div className='mt-40 flex pt-3 border-t '>
-        <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
-        <div className='hidden lg:flex justify-between items-center ml-2'>
-          <div className='leading-4'>
-            <h4 className='font-semibold'>Ralph Ta-oc</h4>
-            <span className='text-xs text-gray-600'>ralphtaoc@gmail.com</span>
-          </div>
-          <Button variant="default2">
-            <MoreVertical size={20}/>
-          </Button>
-        </div>
-      </div>
       </div>
     </div>
   );

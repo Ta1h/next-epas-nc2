@@ -19,8 +19,9 @@ const UserSidebar = () => {
     <div className="h-screen border-r shadow lg:w-60">
       <div className="px-3 py-2 flex-1">
         <Link href="" className="flex items-center mb-14">
-          <div className="relative pt-5 pl-5 w-full">
-            <Image priority width={100} height={100} alt="Logo" src="logo1.svg" />
+          <div className="relative pt-5 px-3 w-full flex justify-between">
+            <h1 className='font-black text-2xl'>ADMIN</h1>
+            <Image priority width={100} height={100} alt="Logo" src="/logo1.svg" />
           </div>
         </Link>
         <div className="space-y-1 lg:space-y-4">
@@ -59,7 +60,7 @@ const UserSidebar = () => {
             ))}
           </TooltipProvider>
         </div>
-      <div className='mt-40 flex pt-3 border-t '>
+      <div className='mt-64 flex pt-3 border-t '>
         <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
         <div className='hidden lg:flex justify-between items-center ml-2'>
           <div className='leading-4'>

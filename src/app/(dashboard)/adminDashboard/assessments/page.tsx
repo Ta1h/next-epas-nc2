@@ -2,7 +2,11 @@ import React from 'react'
 
 const assessment = () => {
   return (
-    <div>assessment</div>
+    <main className='p-10'>
+      <div className='flex justify-center font-semibold text-2xl pb-10'>
+        ASSESSMENTS MANAGEMENT 
+      </div>
+    </main>
   )
 }
 

@@ -1,4 +1,5 @@
 import {
+    ThumbsUp,
     Users2,
     Book,
     BarChart4,
@@ -21,6 +22,7 @@ import {
   } from "lucide-react";
   
   export const Icons = {
+    ThumbsUp,
     Users2,
     Book,
     BarChart4,
