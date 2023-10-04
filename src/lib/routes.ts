@@ -17,15 +17,15 @@ export const userRoutes = [
       href: "/userDashboard/assessment",
     },
     {
+      label: "Recommended",
+      icon: Icons.ThumbsUp,
+      href: "/userDashboard/recommended",
+    },
+    {
       label: "Score",
       icon: Icons.BarChart4,
       href: "/userDashboard/score",
-    },
-    {
-      label: "Settings",
-      icon: Icons.Settings,
-      href: "/userDashboard/settings",
-    },
+    }, 
 ];
 
 export const adminRoutes = [

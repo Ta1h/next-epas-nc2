@@ -12,8 +12,44 @@ export const authOptions: NextAuthOptions= {
     },
     pages: {
         signIn: '/signin',
-        signOut: '/signin',
+        signOut: '/',
     },
+    
+    callbacks: {
+      async jwt({ token, user} ) {
+        const dbUser = await prisma.user.findFirst({
+          where: {
+              email: token.email,
+          },
+        })
+    
+        if (!dbUser) {
+          token.id = user!.id
+          return token
+        }
+
+        return {
+            id: dbUser.id,
+            username: dbUser.username,
+            email: dbUser.email,
+            image: dbUser.image,
+            name: dbUser.name,
+        }
+      },
+      async session({ session, token, user }) {
+        console.log("Session callback: ", session, "Token: ", token);
+    
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            username: token.username,
+            image: token.picture,
+            name: token.name,
+          },
+        };
+      },
+    },    
     providers: [
         CredentialsProvider({
           
@@ -59,10 +95,9 @@ export const authOptions: NextAuthOptions= {
           
             // If email and password are valid and match, return user information
             return {
-              id: existingUser.id + '', // Convert user ID to a string if necessary
+              id: existingUser.id + '', 
               username: existingUser.username,
               email: existingUser.email,
-              // Add any other user-related information here if needed
             };
           }          
         }),
