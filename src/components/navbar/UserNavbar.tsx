@@ -2,10 +2,6 @@ import React from 'react'
 import { Input } from '../ui/Input'
 import { 
   ChevronDown, 
-  User2, 
-  LogOut, 
-  History, 
-  Settings 
 } from 'lucide-react'
 import {
   DropdownMenu,
@@ -17,6 +13,12 @@ import {
 } from "@/components/ui/Dropdown-menu"
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { Button } from '../ui/Button'
+import { signOut } from 'next-auth/react'
+import Profile from '../menu-item/user/Profile'
+import History from '../menu-item/user/History'
+import Settings from '../menu-item/user/Settings'
+import Log_out from '../menu-item/user/Log_out'
 
 
 const UserNavbar = async () => {
@@ -31,21 +33,29 @@ const UserNavbar = async () => {
           <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
           <div className='hidden lg:flex justify-between items-center ml-2'>
             <div className='leading-4'>
-              <h4 className='font-semibold text-sm w-24'>{session?.user.username}</h4>
+              <h4 className='font-semibold text-sm w-24'>{session?.user.username || session?.user.name}</h4>
               <span className='text-xs w-12 text-gray-600'>{session?.user.email}</span>
             </div>
           </div>
       </div>
-      <div className='m-2 flex justify-center items-center'>
+      <div className='m-5 flex justify-center items-center'>
         <DropdownMenu>
           <DropdownMenuTrigger><ChevronDown></ChevronDown></DropdownMenuTrigger>
-          <DropdownMenuContent className='bg-white space-y-1'>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuContent className='bg-white'>
+            <DropdownMenuLabel className='flex justify-center'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem><User2 className='w-4 mr-2'/>Profile</DropdownMenuItem>
-            <DropdownMenuItem><History className='w-4 mr-2'/>History</DropdownMenuItem>
-            <DropdownMenuItem><Settings className='w-4 mr-2'/>Settings</DropdownMenuItem>
-            <DropdownMenuItem><LogOut className='w-4 mr-2'/>Log out</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Profile></Profile>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <History></History>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings></Settings>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Log_out></Log_out>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
