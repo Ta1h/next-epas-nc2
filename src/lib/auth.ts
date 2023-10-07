@@ -16,7 +16,8 @@ export const authOptions: NextAuthOptions= {
     },
     
     callbacks: {
-      async jwt({ token, user} ) {
+      async jwt({ token, user} ) { 
+
         const dbUser = await prisma.user.findFirst({
           where: {
               email: token.email,
@@ -34,20 +35,32 @@ export const authOptions: NextAuthOptions= {
             email: dbUser.email,
             image: dbUser.image,
             name: dbUser.name,
+            role: dbUser.role,
         }
       },
-      async session({ session, token, user }) {
+      async session({ session, token }) {
         console.log("Session callback: ", session, "Token: ", token);
     
-        return {
-          ...session,
-          user: {
-            ...session.user,
-            username: token.username,
-            image: token.picture,
-            name: token.name,
-          },
-        };
+        if (token) {
+          session.user.id = token.id
+          session.user.name = token.name
+          session.user.username = token.username
+          session.user.email = token.email
+          session.user.image = token.picture
+          session.user.role = token.role
+      }
+
+        return session
+        // return {
+        //   ...session,
+        //   user: {
+        //     ...session.user,
+        //     username: token.username,
+        //     image: token.picture,
+        //     name: token.name,
+        //     role: token.role,
+        //   },
+        // };
       },
     },    
     providers: [
@@ -98,6 +111,7 @@ export const authOptions: NextAuthOptions= {
               id: existingUser.id + '', 
               username: existingUser.username,
               email: existingUser.email,
+              name: existingUser.name,
             };
           }          
         }),

@@ -4,7 +4,7 @@ export const userRoutes = [
     {
       label: "Dashboard",
       icon: Icons.LayoutDashboard,
-      href: "/userDashboard",
+      href: "/userDashboard/dashboard",
     },
     {
       label: "Lesson",
@@ -32,7 +32,7 @@ export const adminRoutes = [
     {
       label: "Dashboard",
       icon: Icons.LayoutDashboard,
-      href: "/adminDashboard",
+      href: "/adminDashboard/dashboard",
     },
     {
       label: "Users",

@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React from 'react';
 
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
@@ -24,7 +24,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
+const initialRows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
@@ -37,21 +37,27 @@ const rows = [
 ];
 
 const UserTable = () => {
+  // Map the initialRows data to the format expected by DataGrid
+  const rows = initialRows.map((row) => ({
+    ...row,
+    // Add the fullName field here if needed
+  }));
+
   return (
     <div>
-        <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-                pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                },
-            }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-        />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+      />
     </div>
-  )
-}
+  );
+};
 
-export default UserTable
+export default UserTable;

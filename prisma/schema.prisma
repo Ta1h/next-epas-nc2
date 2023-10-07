@@ -45,17 +45,15 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
+  role          Role      @default(USER)
   accounts      Account[]
   sessions      Session[]
 }
 
-// model Admin{
-//   id        String    @id @default(cuid())
-//   name      String?
-//   email     String    @unique
-//   password  String
-//   image     String?
-// }
+enum Role{
+  ADMIN
+  USER
+}
 
 model VerificationToken {
   identifier String

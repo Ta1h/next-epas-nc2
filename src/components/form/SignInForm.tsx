@@ -14,12 +14,11 @@ import * as z from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
 import GoogleSignInButton from '../GoogleSignInButton'
 import { useRouter } from 'next/navigation';
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 
 const SignInForm = () => {
     const router = useRouter();
-    const {data: session} = useSession();
     const FormSchema = z.object({
       email: z.string().min(1, 'Email is required').email('Invalid email'),
       password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
@@ -45,7 +44,7 @@ const SignInForm = () => {
         if (signInData?.error) {
           console.log(signInData.error); // Log the specific error details
         } else {
-          router.push('/userDashboard'); // Redirect the user to the '/userDashboard' page
+          router.push('/userDashboard/dashboard'); // Redirect the user to the '/userDashboard' page
         }
       } catch (error) {
         console.error('An error occurred during sign-in:', error); // Log any unexpected errors
