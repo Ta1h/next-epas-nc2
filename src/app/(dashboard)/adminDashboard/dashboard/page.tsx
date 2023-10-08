@@ -1,8 +1,15 @@
 
 import React from 'react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 
-const page = () => {
+const page = async () => {
+  const session = await getServerSession(authOptions);
+  if(session?.user.role !== 'ADMIN'){
+    
+  }
+
   return (
     <div className='grid grid-cols-6 p-5 gap-5'>
       <div className='p-3 col-span-4 rounded-md shadow-[0px_3px_8px_0px_#00000024]'>1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae sunt cupiditate laborum, eius tempore doloremque ut voluptates iusto quos dolore laudantium totam alias consequatur blanditiis reprehenderit fugiat, dicta nostrum vero?</div>
