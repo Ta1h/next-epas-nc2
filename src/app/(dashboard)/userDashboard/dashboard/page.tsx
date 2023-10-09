@@ -4,13 +4,6 @@ import { NextResponse } from 'next/server'
 import React from 'react'
 
 const page = async () => {
-  const session = await getServerSession(authOptions)
-
-  if(session){
-    NextResponse.json({user: session.user});
-  }else{
-    NextResponse.json({error: "Not authenticated"})
-  }
 
   return (
     <main >

@@ -33,7 +33,7 @@ const AdminSignInForm = () => {
           const signInData = await signIn('credentials', {
             email: values.email,
             password: values.password,
-          });
+          }, {role: 'ADMIN'});
       
           // Check if there was an error during sign-in
           if (signInData?.error) {

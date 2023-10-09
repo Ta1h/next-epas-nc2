@@ -22,7 +22,7 @@ const AdminNavbar = async() => {
   return (
     <main className=' flex justify-end pr-14 h-20 border-b shadow-sm'>
       <div className='m-2 flex justify-center items-center'>
-        <Input placeholder='Search'>
+        <Input placeholder='Search..'>
         </Input>
       </div>
       <div className='m-2 flex justify-center items-center'>
@@ -38,7 +38,7 @@ const AdminNavbar = async() => {
         <DropdownMenu>
           <DropdownMenuTrigger><ChevronDown></ChevronDown></DropdownMenuTrigger>
           <DropdownMenuContent className='bg-white space-y-1'>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel className='flex justify-center'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem><Profile></Profile></DropdownMenuItem>
             <DropdownMenuItem><History></History></DropdownMenuItem>

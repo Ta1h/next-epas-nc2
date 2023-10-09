@@ -33,7 +33,7 @@ const UserNavbar = async () => {
           <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
           <div className='hidden lg:flex justify-between items-center ml-2'>
             <div className='leading-4'>
-              <h4 className='font-semibold text-sm w-24'>{session?.user.username || session?.user.name}</h4>
+              <h4 className='font-semibold text-sm'>{session?.user.username || session?.user.name}</h4>
               <span className='text-xs w-12 text-gray-600'>{session?.user.email}</span>
             </div>
           </div>

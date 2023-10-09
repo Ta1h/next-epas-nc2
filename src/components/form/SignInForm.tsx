@@ -38,7 +38,7 @@ const SignInForm = () => {
         const signInData = await signIn('credentials', {
           email: values.email,
           password: values.password,
-        });
+        }, {role: 'USER'});
     
         // Check if there was an error during sign-in
         if (signInData?.error) {

@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground hover:border",
         link: " 2xl:text-base font-bold text-primary underline-offset-8 hover:underline hover:text-purple-700 transition-all ease-in-out origin-left",
         google: "bg-gray-200 text-gray-400",
-        menu_item: "flex justify-start hover:bg-gray-100",
+        menu_item: "flex justify-start hover:bg-gray-100 w-28",
       },
       size: {
         default: "h-10 px-4 py-2",
