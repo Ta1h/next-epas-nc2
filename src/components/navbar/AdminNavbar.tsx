@@ -26,7 +26,11 @@ const AdminNavbar = async() => {
         </Input>
       </div>
       <div className='m-2 flex justify-center items-center'>
-          <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
+          {session?.user.image ? (
+            <img src={session?.user.image} alt="" className='w-10 h-10 rounded-xl border'/>
+          ):(
+            <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt="" className='w-10 h-10 rounded-xl border'/>
+          )}
           <div className='hidden lg:flex justify-between items-center ml-2'>
             <div className='leading-4'>
               <h4 className='font-semibold text-sm w-24'>{session?.user.username || session?.user.name}</h4>

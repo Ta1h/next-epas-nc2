@@ -38,16 +38,17 @@ const SignInForm = () => {
         const signInData = await signIn('credentials', {
           email: values.email,
           password: values.password,
-        }, {role: 'USER'});
+        }, { role: 'USER' });
     
         // Check if there was an error during sign-in
         if (signInData?.error) {
-          console.log(signInData.error); // Log the specific error details
+          console.log('sign in data error');
+          console.log(signInData.error);
         } else {
-          router.push('/userDashboard/dashboard'); // Redirect the user to the '/userDashboard' page
+          router.push('/userDashboard/dashboard');
         }
       } catch (error) {
-        console.error('An error occurred during sign-in:', error); // Log any unexpected errors
+        console.error('An error occurred during sign-in:', error);
       }
     };    
 

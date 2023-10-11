@@ -14,7 +14,6 @@ export const authOptions: NextAuthOptions= {
         signIn: '/signin',
         signOut: '/',
     },
-    
     callbacks: {
       async jwt({ token, user} ) { 
 
@@ -46,7 +45,7 @@ export const authOptions: NextAuthOptions= {
           session.user.name = token.name
           session.user.username = token.username
           session.user.email = token.email
-          session.user.image = token.picture
+          session.user.image = token.image as string
           session.user.role = token.role
       }
 
@@ -74,46 +73,51 @@ export const authOptions: NextAuthOptions= {
           },
 
           async authorize(credentials) {
-            // Check if email or password is missing in credentials
-            if (!credentials?.email || !credentials?.password) {
-              // Return null to indicate authentication failure due to incomplete credentials
-              throw new Error('email or password is missing in credentials');
-            }
-          
-            // Attempt to find a user with the provided email using Prisma
-            const existingUser = await prisma.user.findUnique({
-              where: { email: credentials?.email },
-            });
-          
-            // If no user with the provided email is found
-            if (!existingUser) {
-              // Return null to indicate authentication failure due to an unknown email
-              throw new Error('user email is not found');
-            }
-          
-            // If the user's password is stored securely, compare the provided password
-            // with the stored password using a secure comparison function like bcrypt's compare
-            if (existingUser.password) {
-              const passwordMatch = await compare(
-                credentials.password,
-                existingUser.password
-              );
-          
-              // If the passwords don't match
-              if (!passwordMatch) {
-                // Return null to indicate authentication failure due to an incorrect password
-                throw new Error('password don&apost match');
+            try {
+              // Check if email or password is missing in credentials
+              if (!credentials?.email || !credentials?.password) {
+                return null; // Indicate authentication failure due to incomplete credentials
               }
-            }
           
-            // If email and password are valid and match, return user information
-            return {
-              id: existingUser.id + '', 
-              username: existingUser.username,
-              email: existingUser.email,
-              name: existingUser.name,
-            };
-          }          
+              // Attempt to find a user with the provided email using Prisma
+              const existingUser = await prisma.user.findUnique({
+                where: { email: credentials?.email },
+              });
+          
+              // If no user with the provided email is found
+              if (!existingUser) {
+                return null; // Indicate authentication failure due to an unknown email
+              }
+          
+              // If the user's password is stored securely, compare the provided password
+              // with the stored password using a secure comparison function like bcrypt's compare
+              if (existingUser.password) {
+                const passwordMatch = await compare(
+                  credentials.password,
+                  existingUser.password
+                );
+          
+                // If the passwords don't match
+                if (!passwordMatch) {
+                  return null; // Indicate authentication failure due to an incorrect password
+                }
+              }
+          
+              // If email and password are valid and match, return user information
+              return {
+                id: existingUser.id, 
+                username: existingUser.username,
+                email: existingUser.email,
+                name: existingUser.name,
+                image: existingUser.image,
+              };
+            } catch (error) {
+              // Handle any other errors here (e.g., database errors)
+              console.error('Error during authentication:', error);
+              return null; // Indicate authentication failure due to an error
+            }
+          }
+                    
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,

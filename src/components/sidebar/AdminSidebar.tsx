@@ -60,18 +60,6 @@ const UserSidebar = () => {
             ))}
           </TooltipProvider>
         </div>
-      <div className='mt-64 flex pt-3 border-t '>
-        <img src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true" alt="" className='w-10 h-10 rounded-md'/>
-        <div className='hidden lg:flex justify-between items-center ml-2'>
-          <div className='leading-4'>
-            <h4 className='font-semibold'>Ralph Ta-oc</h4>
-            <span className='text-xs text-gray-600'>ralphtaoc@gmail.com</span>
-          </div>
-          <Button variant="default2">
-            <MoreVertical size={20}/>
-          </Button>
-        </div>
-      </div>
       </div>
     </div>
   );

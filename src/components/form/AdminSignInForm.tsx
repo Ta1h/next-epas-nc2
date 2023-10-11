@@ -37,6 +37,7 @@ const AdminSignInForm = () => {
       
           // Check if there was an error during sign-in
           if (signInData?.error) {
+            console.log('sign in data error')
             console.log(signInData.error); // Log the specific error details
           } else {
             router.push('/adminDashboard/dashboard'); // Redirect the user to the '/userDashboard' page
