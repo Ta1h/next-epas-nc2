@@ -46,7 +46,8 @@ export async function POST(req: Request) {
         });
 
         // securing hashed password using rest
-        const { password: newUserPassword, ...rest} = newUser; 
+        // password: newUserPassword,
+        const {...rest} = newUser; 
 
         return NextResponse.json({user: rest, message: 'user created succesfully'}, {status: 201});
 

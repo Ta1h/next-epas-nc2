@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import React from 'react'
 import Navbar from '@/components/homepage/Navbar'
 import Hero from '@/components/homepage/Hero'
 import SectionPrograms from '@/components/homepage/SectionPrograms'

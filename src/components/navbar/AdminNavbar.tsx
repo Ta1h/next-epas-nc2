@@ -1,6 +1,5 @@
 import React from 'react'
 import { ChevronDown } from 'lucide-react'
-import { Search } from 'lucide-react'
 import { Input } from '../ui/Input'
 import {
   DropdownMenu,
@@ -16,6 +15,7 @@ import Profile from '../menu-item/admin/Profile'
 import History from '../menu-item/admin/History'
 import Settings from '../menu-item/admin/Settings'
 import Log_out from '../menu-item/admin/Log_out'
+import Image from 'next/image'
 
 const AdminNavbar = async() => {
   const session = await getServerSession(authOptions);
@@ -27,9 +27,9 @@ const AdminNavbar = async() => {
       </div>
       <div className='m-2 flex justify-center items-center'>
           {session?.user.image ? (
-            <img src={session?.user.image} alt="" className='w-10 h-10 rounded-xl border'/>
+            <Image src={session?.user.image} width={100} height={100} alt="" className='w-10 h-10 rounded-xl border'/>
           ):(
-            <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt="" className='w-10 h-10 rounded-xl border'/>
+            <Image src='/profile.svg' width={100} height={100} alt="" className='w-10 h-10 rounded-xl border'/>
           )}
           <div className='hidden lg:flex justify-between items-center ml-2'>
             <div className='leading-4'>

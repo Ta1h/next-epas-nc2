@@ -8,9 +8,6 @@ import { cn } from "@/lib/utils";
 import { adminRoutes } from "@/lib/routes";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip';
 import { usePathname } from 'next/navigation';
-import { Ghost, MoreVertical } from 'lucide-react';
-import { Button } from '../ui/Button';
-
 
 const UserSidebar = () => {
   const pathname = usePathname();

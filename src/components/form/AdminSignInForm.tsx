@@ -40,7 +40,13 @@ const AdminSignInForm = () => {
             console.log('sign in data error')
             console.log(signInData.error); // Log the specific error details
           } else {
-            router.push('/adminDashboard/dashboard'); // Redirect the user to the '/userDashboard' page
+            try {
+              
+              router.push('/adminDashboard/dashboard');
+              console.log('pushed') // Redirect the user to the '/userDashboard' page
+            } catch (error) {
+              console.log("inside error: ", error)
+            }
           }
         } catch (error) {
           console.error('An error occurred during sign-in:', error); // Log any unexpected errors

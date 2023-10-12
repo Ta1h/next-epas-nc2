@@ -2,8 +2,6 @@
 
 import React from 'react'
 import Image from 'next/image'
-import Lottie from "lottie-react"
-import animationData from "@/components/animation/animation_llolx1n6.json"
 
 const Hero = () => {
   return (

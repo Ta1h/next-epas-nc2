@@ -3,7 +3,7 @@ import { FC } from "react";
 
 interface SectionAboutProps {}
 
-const SectionAbout: FC<SectionAboutProps> = ({}) => {
+const SectionAbout: FC<SectionAboutProps> = () => {
   return (
     <div id='about' className='w-full h-screen'>
         SectionAbout

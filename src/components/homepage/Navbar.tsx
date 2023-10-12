@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, Fragment} from 'react'
+import React from 'react';
+import { useState, useEffect} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -12,7 +13,6 @@ const Navbar = () => {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {

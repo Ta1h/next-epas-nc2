@@ -1,3 +1,4 @@
+import React from "react";
 import { FC } from "react";
 import Link from "next/link";
 import ScrollLink from "../ui/ScrollLink";
@@ -35,7 +36,7 @@ const routes = [
   },
 ];
 
-const MobileNav: FC<MobileNavProps> = ({}) => {
+const MobileNav: FC<MobileNavProps> = () => {
   const pathname = usePathname();
 
   return (

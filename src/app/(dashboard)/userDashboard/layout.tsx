@@ -1,3 +1,4 @@
+import React from 'react'
 import Provider from '@/components/Provider'
 import UserSidebar from '@/components/sidebar/UserSidebar'
 import UserNavbar from '@/components/navbar/UserNavbar'

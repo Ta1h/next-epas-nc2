@@ -1,4 +1,3 @@
-import NextAuth from "next-auth/next"
 import { User } from 'next-auth'
 import { UserRole } from '@prisma/client'
 

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,10 +8,6 @@ import { cn } from "@/lib/utils";
 import { userRoutes } from "@/lib/routes";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip';
 import { usePathname } from 'next/navigation';
-import { Ghost, MoreVertical } from 'lucide-react';
-import { Button } from '../ui/Button';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import { useSession } from 'next-auth/react';
 
 

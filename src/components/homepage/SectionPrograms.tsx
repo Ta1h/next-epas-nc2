@@ -1,9 +1,9 @@
 import React from 'react'
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
 interface SectionProgramsProps {}
 
-const SectionPrograms: FC<SectionProgramsProps> = ({}) => {
+const SectionPrograms: FC<SectionProgramsProps> = () => {
   return (
     <div id='programs' className='w-full'>
         <div className='justify-center items-center flex h-56 bg-black text-white'>

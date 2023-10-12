@@ -7,7 +7,6 @@ import Link from 'next/link'
 import {FcGoogle} from "react-icons/fc"
 import { Input } from "@/components/ui/Input"
 import { Button } from '@/components/ui/Button'
-import Icons from '@/components/ui/Icons'
 import { useForm } from 'react-hook-form'
 import { Form, FormField, FormItem, FormControl, FormMessage } from '../ui/form'
 import * as z from "zod"

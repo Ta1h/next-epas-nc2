@@ -1,3 +1,4 @@
+import React from 'react'
 import Provider from '@/components/Provider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'

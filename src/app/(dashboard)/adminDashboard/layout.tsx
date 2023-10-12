@@ -1,3 +1,4 @@
+import React from 'react'
 import Provider from '@/components/Provider'
 import AdminSidebar from '@/components/sidebar/AdminSidebar'
 import AdminNavbar from '@/components/navbar/AdminNavbar'

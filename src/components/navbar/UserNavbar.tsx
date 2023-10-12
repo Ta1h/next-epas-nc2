@@ -13,8 +13,6 @@ import {
 } from "@/components/ui/Dropdown-menu"
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { Button } from '../ui/Button'
-import { signOut } from 'next-auth/react'
 import Profile from '../menu-item/user/Profile'
 import History from '../menu-item/user/History'
 import Settings from '../menu-item/user/Settings'
@@ -32,9 +30,9 @@ const UserNavbar = async () => {
       </div>
       <div className='m-2 flex justify-center items-center'>
           {session?.user.image ? (
-            <img src={session?.user.image} alt="" className='w-10 h-10 rounded-xl border'/>
+            <img src={session?.user.image} width={100} height={100} alt="" className='w-10 h-10 rounded-xl border'/>
           ):(
-            <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt="" className='w-10 h-10 rounded-xl border'/>
+            <img src='/profile.svg' width={100} height={100} alt="" className='w-10 h-10 rounded-xl border'/>
           )}
           <div className='hidden lg:flex justify-between items-center ml-2'>
             <div className='leading-4'>
