@@ -13,6 +13,8 @@ const buttonVariants = cva(
         default2: "rounded-lg bg-transparent text-black transition-all",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        destructive2:
+          "hover:bg-red-600 bg-black text-white",
         outline:
           "duration-100 rounded-lg border-black border-2 hover:border-purple-700 hover:text-purple-700 transition-all",
         secondary:
@@ -21,6 +23,8 @@ const buttonVariants = cva(
         link: " 2xl:text-base font-bold text-primary underline-offset-8 hover:underline hover:text-purple-700 transition-all ease-in-out origin-left",
         google: "bg-gray-200 text-gray-400",
         menu_item: "flex justify-start hover:bg-gray-100 w-28",
+        update: "bg-blue-600 text-black",
+        page: "hover:font-semibold hover:bg-gray-200",
       },
       size: {
         default: "h-10 px-4 py-2",

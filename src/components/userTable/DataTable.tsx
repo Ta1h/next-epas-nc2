@@ -1,10 +1,14 @@
 "use client"
-import React from "react"
+import * as React from "react"
 import {
   ColumnDef,
+  ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -17,6 +21,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/Button"
+import { Input } from "@/components/ui/Input"
+import { ChevronLeft } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -27,18 +34,41 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   // console.log("Columns:", columns);
   // console.log("Data:", data);
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+    
+      sorting,
+      columnFilters,
+    },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
   })
 
   return (
     <main>
+      <div className="flex items-center mb-5">
+        <Input
+          placeholder="Search email..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -67,7 +97,6 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => {
-                    console.log("Cell Data:", cell); // Add this line
                     return (
                       <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -86,9 +115,25 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div>
-        <Button onClick={() => table.previousPage()}>prev page</Button>
-        <Button onClick={() => table.nextPage()}>next page</Button>
+      <div className="flex items-center justify-center space-x-2 py-4">
+        <Button
+          variant="page"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <ChevronLeft/>
+          Prev
+        </Button>
+        <Button
+          variant="page"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+          <ChevronRight/>
+        </Button>
       </div>
     </main>
   )

@@ -14,7 +14,6 @@ import {
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import Profile from '../menu-item/user/Profile'
-import History from '../menu-item/user/History'
 import Settings from '../menu-item/user/Settings'
 import Log_out from '../menu-item/user/Log_out'
 
@@ -43,15 +42,12 @@ const UserNavbar = async () => {
       </div>
       <div className='m-5 flex justify-center items-center'>
         <DropdownMenu>
-          <DropdownMenuTrigger><ChevronDown></ChevronDown></DropdownMenuTrigger>
+          <DropdownMenuTrigger><ChevronDown className='hover:bg-gray-200 rounded-md'></ChevronDown></DropdownMenuTrigger>
           <DropdownMenuContent className='bg-white'>
             <DropdownMenuLabel className='flex justify-center'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Profile></Profile>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <History></History>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings></Settings>

@@ -1,45 +1,51 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { DataTable } from "@/components/userTable/DataTable";
 import { columns } from "@/components/userTable/columns";
+import User from '@/types/user'
 
-async function getData() {
-  try {
-    const response = await fetch('http://localhost:3000/api/users', {
-      method: 'GET',
-    });
-    
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+export default function DemoPage() {
+  const [data, setData] = useState<User[]>([]);
+
+  async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:3000/api/users', {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+
+      if (Array.isArray(result)) {
+        const usersWithUserRole = result
+          .filter((user: User) => user.role === 'USER')
+          .map((user: User) => ({
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            created: user.created,
+          }));
+
+        setData(usersWithUserRole);
+      } else {
+        console.error('Response data is not an array');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    
-    const data = await response.json();
-    // console.log(data)
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
   }
-}
 
-export default async function DemoPage() {
-  
-  try {
-    const data = await getData();
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    console.log("Columns:", columns);
-    console.log("Data:", data);
-
-    return (
-      <div className="m-10">
-        <DataTable columns={columns} data={data} />
-      </div>
-    );
-  } catch (error) {
-    console.error('Error in DemoPage:', error);
-    return (
-      <div className="m-10">
-        <p>Error loading data.</p>
-      </div>
-    );
-  }
+  return (
+    <div className="m-5">
+      <DataTable columns={columns} data={data} />
+    </div>
+  );
 }

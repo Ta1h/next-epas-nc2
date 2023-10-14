@@ -12,7 +12,6 @@ import {
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import Profile from '../menu-item/admin/Profile'
-import History from '../menu-item/admin/History'
 import Settings from '../menu-item/admin/Settings'
 import Log_out from '../menu-item/admin/Log_out'
 import Image from 'next/image'
@@ -20,7 +19,7 @@ import Image from 'next/image'
 const AdminNavbar = async() => {
   const session = await getServerSession(authOptions);
   return (
-    <main className=' flex justify-end pr-14 h-20 border-b shadow-sm'>
+    <main className=' flex justify-end pr-16 h-20 border-b shadow-sm'>
       <div className='m-2 flex justify-center items-center'>
         <Input placeholder='Search..'>
         </Input>
@@ -40,12 +39,11 @@ const AdminNavbar = async() => {
       </div>
       <div className='m-2 flex justify-center items-center'>
         <DropdownMenu>
-          <DropdownMenuTrigger><ChevronDown></ChevronDown></DropdownMenuTrigger>
+          <DropdownMenuTrigger><ChevronDown className='hover:bg-gray-200 rounded-md'></ChevronDown></DropdownMenuTrigger>
           <DropdownMenuContent className='bg-white space-y-1'>
             <DropdownMenuLabel className='flex justify-center'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem><Profile></Profile></DropdownMenuItem>
-            <DropdownMenuItem><History></History></DropdownMenuItem>
             <DropdownMenuItem><Settings></Settings></DropdownMenuItem>
             <DropdownMenuItem><Log_out></Log_out></DropdownMenuItem>
           </DropdownMenuContent>
