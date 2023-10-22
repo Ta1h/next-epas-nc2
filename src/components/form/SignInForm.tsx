@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import {FcGoogle} from "react-icons/fc"
 import { Input } from "@/components/ui/Input"
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { Form, FormField, FormItem, FormControl, FormMessage } from '../ui/form'
 import * as z from "zod"
@@ -14,7 +14,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import GoogleSignInButton from '../GoogleSignInButton'
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
-
 
 const SignInForm = () => {
     const router = useRouter();
@@ -44,7 +43,7 @@ const SignInForm = () => {
           console.log('sign in data error');
           console.log(signInData.error);
         } else {
-          router.push('/userDashboard/dashboard');
+          router.push('http://localhost:3000/userDashboard/dashboard');
         }
       } catch (error) {
         console.error('An error occurred during sign-in:', error);
@@ -124,7 +123,6 @@ const SignInForm = () => {
                 </div>
             </form>
         </Form>
-
         <div>
           <GoogleSignInButton>
             <FcGoogle/>

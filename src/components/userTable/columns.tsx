@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import User from '@/types/user'
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { TableCellWithAlertDialog } from "@/components/userTable/TableCellWithAlertDialog"
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -52,13 +53,14 @@ export const columns: ColumnDef<User>[] = [
     cell: ({row}) => {
       const createdAt = row.getValue('created');
       const formated = new Date(createdAt as string).toLocaleDateString();
-      return <div className="font-medium">{formated}</div>
+      return <div className="font-medium ml-6">{formated}</div>
     }
   },
   {
     id: 'Edit',
-    cell: () => {
-      return <Button variant='default'>view</Button>
+    cell: ({row}) => {
+      const deletedRow = row.original.id;
+      return <TableCellWithAlertDialog deletedRow={deletedRow}/>
     }
   },
 ];

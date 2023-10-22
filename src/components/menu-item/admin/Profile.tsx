@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { User2 } from 'lucide-react'
 import React from 'react'
 

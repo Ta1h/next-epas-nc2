@@ -24,6 +24,7 @@ export default function DemoPage() {
         const usersWithUserRole = result
           .filter((user: User) => user.role === 'USER')
           .map((user: User) => ({
+            id: user.id,
             email: user.email,
             name: user.name,
             role: user.role,
@@ -31,6 +32,7 @@ export default function DemoPage() {
           }));
 
         setData(usersWithUserRole);
+        
       } else {
         console.error('Response data is not an array');
       }

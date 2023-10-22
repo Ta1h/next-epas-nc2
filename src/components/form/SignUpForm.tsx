@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Input } from "@/components/ui/Input"
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
 import { useForm } from 'react-hook-form';
 import * as z from "zod"

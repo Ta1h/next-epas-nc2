@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "../ui/Button"
+import { Button } from "../ui/button"
 import { Input } from "@/components/ui/Input"
 import { ChevronLeft } from "lucide-react"
 import { ChevronRight } from "lucide-react"
@@ -40,26 +40,32 @@ export function DataTable<TData, TValue>({
   );
   // console.log("Columns:", columns);
   // console.log("Data:", data);
+  const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
     data,
     columns,
-    state: {
-    
-      sorting,
-      columnFilters,
-    },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange: setRowSelection,
+    state: {
+      // pagination: {
+      //   pageIndex: 0,
+      //   pageSize: 4,
+      // },
+      sorting,
+      columnFilters,
+      rowSelection,
+    },
   })
 
   return (
     <main>
-      <div className="flex items-center mb-5">
+      <div className="flex items-center mb-5 ">
         <Input
           placeholder="Search email..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -69,8 +75,8 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border max-h-80 overflow-y-auto">
+        <Table className="overflow-y-auto">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -95,12 +101,13 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  // className={parseInt(row.id, 10) % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}
                 >
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
+                        <TableCell key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
                     );
                   })}
                 </TableRow>
@@ -114,7 +121,7 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
+      </div>  
       <div className="flex items-center justify-center space-x-2 py-4">
         <Button
           variant="page"
@@ -135,6 +142,7 @@ export function DataTable<TData, TValue>({
           <ChevronRight/>
         </Button>
       </div>
+      
     </main>
   )
 }

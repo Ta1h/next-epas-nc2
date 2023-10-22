@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import { Input } from '../ui/Input'
-import { Button } from '../ui/Button'
+import { Button } from '../ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
@@ -42,7 +42,7 @@ const AdminSignInForm = () => {
           } else {
             try {
               
-              router.push('/adminDashboard/dashboard');
+              router.push('http://localhost:3000/adminDashboard/dashboard');
               console.log('pushed') // Redirect the user to the '/userDashboard' page
             } catch (error) {
               console.log("inside error: ", error)
