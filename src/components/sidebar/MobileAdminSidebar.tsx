@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const MobileAdminSidebar = () => {
-  return (
-    <div>MobileAdminSidebar</div>
-  )
-}
+	return (
+		<div>MobileAdminSidebar</div>
+	);
+};
 
-export default MobileAdminSidebar
+export default MobileAdminSidebar;

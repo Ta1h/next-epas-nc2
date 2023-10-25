@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "pnpx eslint \"src/**/*.tsx\" --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -54,8 +53,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "daisyui": "^3.9.3",
     "eslint": "^8.51.0",
     "eslint-config-standard-with-typescript": "^39.1.1",

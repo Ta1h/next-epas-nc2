@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const MobileUserSidebar = () => {
-  return (
-    <div>MobileUserSidebar</div>
-  )
-}
+	return (
+		<div>MobileUserSidebar</div>
+	);
+};
 
-export default MobileUserSidebar
+export default MobileUserSidebar;
