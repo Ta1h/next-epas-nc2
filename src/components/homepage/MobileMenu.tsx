@@ -10,7 +10,7 @@ import {
 	SheetContent,
 	SheetTrigger,
 } from '@/components/ui/Sheet';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import Icons from '@/components/ui/Icons';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';

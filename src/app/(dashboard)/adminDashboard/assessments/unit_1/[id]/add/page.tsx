@@ -17,9 +17,7 @@ const page: FC<props> = ({params}) => {
 				</Link>
 			</div>
 
-			<div>
-        form
-			</div>
+			<h1>Add Question</h1>
 		</div>
 	);
 };

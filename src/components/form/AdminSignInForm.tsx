@@ -42,7 +42,7 @@ const AdminSignInForm = () => {
 			} else {
 				try {
               
-					router.push('http://localhost:3000/adminDashboard/dashboard');
+					router.push('/adminDashboard/dashboard');
 					console.log('pushed'); // Redirect the user to the '/userDashboard' page
 				} catch (error) {
 					console.log('inside error: ', error);
