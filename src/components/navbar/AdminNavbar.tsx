@@ -44,7 +44,6 @@ const AdminNavbar = async() => {
 						<DropdownMenuLabel className='flex justify-center'>My Account</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem><Profile></Profile></DropdownMenuItem>
-						<DropdownMenuItem><Settings></Settings></DropdownMenuItem>
 						<DropdownMenuItem><Log_out></Log_out></DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

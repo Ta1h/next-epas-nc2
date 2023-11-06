@@ -50,9 +50,6 @@ const UserNavbar = async () => {
 							<Profile></Profile>
 						</DropdownMenuItem>
 						<DropdownMenuItem>
-							<Settings></Settings>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
 							<Log_out></Log_out>
 						</DropdownMenuItem>
 					</DropdownMenuContent>

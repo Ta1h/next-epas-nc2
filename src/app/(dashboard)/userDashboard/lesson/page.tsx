@@ -4,7 +4,8 @@ import React from 'react';
 const lesson = () => {
 	return (
 		<div className='p-10'>
-			<div className='grid gap-7 px-32 items-center'>
+			<h1 className='flex justify-center font-semibold text-2xl mb-10'>LESSON SECTION</h1>
+			<div className='grid lg:grid-cols-3 gap-7 px-32 items-center'>
 
 				<Link href={'lesson/unit_1'} className='flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]'>
 					<h1 className='font-semibold'>Unit 1:</h1>

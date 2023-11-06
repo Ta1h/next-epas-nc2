@@ -75,14 +75,14 @@ export function DataTable<TData, TValue>({
 					className="max-w-sm"
 				/>
 			</div>
-			<div className="rounded-md border">
-				<Table className="overflow-y-auto">
+			<div className='relative w-full overflow-auto rounded-lg'>
+				<Table className='rounded-md '>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
 									return (
-										<TableHead key={header.id}>
+										<TableHead key={header.id} className='bg-black text-white'>
 											{header.isPlaceholder
 												? null
 												: flexRender(
@@ -101,7 +101,7 @@ export function DataTable<TData, TValue>({
 								<TableRow
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
-									// className={parseInt(row.id, 10) % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}
+									className={parseInt(row.id, 10) % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}
 								>
 									{row.getVisibleCells().map((cell) => {
 										return (

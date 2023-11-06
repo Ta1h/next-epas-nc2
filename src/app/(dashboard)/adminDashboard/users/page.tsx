@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { DataTable } from '@/components/userTable/DataTable';
 import { columns } from '@/components/userTable/columns';
-import User from '@/types/user';
+import { User } from '@/types/data';
 
 export default function DemoPage() {
 	const [data, setData] = useState<User[]>([]);
 
 	async function fetchData() {
 		try {
-			const response = await fetch('http://localhost:3000/api/users', {
+			const response = await fetch('/api/users', {
 				method: 'GET',
 			});
 

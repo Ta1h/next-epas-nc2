@@ -17,8 +17,8 @@ const page = () => {
 
 			<div className='grid justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
 				{lessonUnit1.map((route)=>(
-					<Link key={route.href} href={route.href} className='flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]'>
-						<h1 className='font-semibold'>{route.lessonNumber}</h1>
+					<Link key={route.id} href={''} className='flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]'>
+						<h1 className='font-semibold'>{route.title}</h1>
 						<p className='text-sm'>{route.topic}</p>
 					</Link>
 				))}

@@ -1,4 +1,3 @@
-import question from "@/components/assessmentsQuestion/question";
 import Icons from "@/components/ui/Icons";
 
 export const userRoutes = [

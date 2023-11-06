@@ -1,6 +1,6 @@
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import User from '@/types/user';
+import { User } from '@/types/data';
 import { Button } from '../ui/Button';
 import { ArrowUpDown } from 'lucide-react';
 import { TableCellWithAlertDialog } from '@/components/userTable/TableCellWithAlertDialog';

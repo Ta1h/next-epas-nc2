@@ -43,7 +43,7 @@ const SignInForm = () => {
 				console.log('sign in data error');
 				console.log(signInData.error);
 			} else {
-				router.push('http://localhost:3000/userDashboard/dashboard');
+				router.push('/userDashboard/dashboard');
 			}
 		} catch (error) {
 			console.error('An error occurred during sign-in:', error);

@@ -9,10 +9,11 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
+				empty: '',
 				default: 'rounded-lg bg-transparent bg-black text-white hover:bg-purple-700 transition-all',
 				default2: 'rounded-lg bg-transparent text-black transition-all',
 				destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+          'bg-white text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white',
 				destructive2:
           'hover:bg-red-600 bg-black text-white',
 				outline:
@@ -23,7 +24,9 @@ const buttonVariants = cva(
 				link: ' 2xl:text-base font-bold text-primary underline-offset-8 hover:underline hover:text-purple-700 transition-all ease-in-out origin-left',
 				google: 'bg-gray-200 text-gray-400',
 				menu_item: 'flex justify-start hover:bg-gray-100 w-28',
-				update: 'bg-blue-600 text-black',
+				update: 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white',
+				neutral: 'bg-white text-black border-2 border-black hover:bg-black hover:text-white',
+				successful: 'bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white',
 				page: 'hover:font-semibold hover:bg-gray-200',
 			},
 			size: {
