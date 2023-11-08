@@ -28,13 +28,21 @@ module.exports = {
     },
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "prettier"
     ],
     "settings": {
         "react": {
             "version": "18.2.0" 
+        },
+        'import/resolver': {
+            node: {
+              extensions: ['.js', '.mjs', '.cjs'],
+            },
         }
     },
     "rules": {
+        "react/prop-types": "off",
+        'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     }
 }

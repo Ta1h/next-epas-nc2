@@ -1,15 +1,16 @@
-import { Button } from '@/components/ui/Button';
-import { User2 } from 'lucide-react';
-import React from 'react';
+import { Button } from '@/components/ui/Button'
+import { User2 } from 'lucide-react'
+import React from 'react'
 
 const Profile = () => {
-	return (
-		<div>
-			<Button variant='menu_item'>
-				<User2 className='w-4 mr-2'/>Profile
-			</Button>
-		</div>
-	);
-};
+  return (
+    <div>
+      <Button variant="menu_item">
+        <User2 className="w-4 mr-2" />
+        Profile
+      </Button>
+    </div>
+  )
+}
 
-export default Profile;
+export default Profile
