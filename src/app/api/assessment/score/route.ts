@@ -28,9 +28,13 @@ export async function POST(req: NextResponse) {
     });
 
     return NextResponse.json(newScore, {status: 200})    
-  } catch (error: any) {
-    return NextResponse.json({message: error.message}, {status: 500});
-    
+  } catch (error) {
+    if (error instanceof Error) {
+      // Handle the error
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
+    // Handle other cases or rethrow the error
+    throw error;
   }
 }
 
