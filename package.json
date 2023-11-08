@@ -1,5 +1,5 @@
 {
-  "type": "commonjs",
+  "type": "module",
   "name": "next-epas-nc2",
   "version": "1.0.0",
   "scripts": {
