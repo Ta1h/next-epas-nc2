@@ -7,7 +7,6 @@ import Image from 'next/image'
 
 import { Button } from '@/components/ui/Button'
 import ScrollLink from '@/components/ui/ScrollLink'
-import MobileMenu from './MobileMenu'
 
 const Navbar = () => {
   const [, setShow] = useState(true)
@@ -75,7 +74,7 @@ const Navbar = () => {
         </Button>
       </div>
       <div className="flex-center place-content-end">
-        <MobileMenu />
+        
       </div>
     </div>
   )
