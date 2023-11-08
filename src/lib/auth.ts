@@ -50,16 +50,6 @@ export const authOptions: NextAuthOptions= {
       }
 
         return session
-        // return {
-        //   ...session,
-        //   user: {
-        //     ...session.user,
-        //     username: token.username,
-        //     image: token.picture,
-        //     name: token.name,
-        //     role: token.role,
-        //   },
-        // };
       },
     },    
     providers: [

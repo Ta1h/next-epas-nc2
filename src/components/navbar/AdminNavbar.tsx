@@ -12,7 +12,6 @@ import {
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import Profile from '../menu-item/admin/Profile';
-import Settings from '../menu-item/admin/Settings';
 import Log_out from '../menu-item/admin/Log_out';
 import Image from 'next/image';
 

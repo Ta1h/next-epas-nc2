@@ -19,6 +19,7 @@ const Page: FC<Props> = ({ params }) => {
   const [shuffledChoices, setShuffledChoices] = useState<Choice[]>([]);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [retakingQuiz, setRetakingQuiz] = useState(false);
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const lessonId = params.id;
 
   function shuffleArray(array: Choice[]) {
@@ -88,6 +89,37 @@ const Page: FC<Props> = ({ params }) => {
   useEffect(() => {
     setScore(0);
   }, [lessonId[0]]);
+
+  useEffect(() => {
+    // Check if the score has been submitted, and if so, make the API POST request
+    if (scoreSubmitted) {
+      const submitScoreToAPI = async () => {
+        try {
+          const response = await fetch('/api/assessment/score', {
+            method: 'POST',
+            body: JSON.stringify({
+              lessonScore: score,
+              lessonLength: questions.length,
+              userId: 'clnl4x1gv0000ae9wagg1i7kb',
+              unitId: lessonId[3],
+              lessonId: lessonId[0],
+            }),
+          });
+
+          if (response.ok) {
+            const newScore = await response.json();
+            console.log('Score submitted successfully:', newScore);
+          } else {
+            console.error('Failed to submit score');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
+      submitScoreToAPI();
+    }
+  }, [score, scoreSubmitted]);
   
   const submitTest = () => {
     let finalScore = 0;
@@ -107,6 +139,7 @@ const Page: FC<Props> = ({ params }) => {
       }
     });
     setScore(finalScore);
+    setScoreSubmitted(true);
     // console.log('Final Score: ', finalScore + '/' + questions.length);
   };
 
@@ -115,7 +148,6 @@ const Page: FC<Props> = ({ params }) => {
     setQuizSubmitted(false); // Reset the quiz submission state
     setCurrentQuestionIndex(0); // Reset the current question index
     setUserAnswers({}); // Reset user answers
-    setScore(0); // Reset the score
   };
 
   return (
@@ -173,15 +205,15 @@ const Page: FC<Props> = ({ params }) => {
             </div>
           </div>
         ) : retakingQuiz ? (
-          <div key={questions[currentQuestionIndex].id} className='flex justify-center'>
-            <div className='flex-col max-w-3xl space-y-10 p-5 rounded-md shadow-[0px_3px_8px_0px_#00000024]'>
+          <div key={questions[currentQuestionIndex].id} className='flex justify-center mx-6'>
+            <div className='flex-col w-full space-y-16 px-10 py-14 rounded-lg shadow-[0px_3px_8px_0px_#00000024]'>
               <h1 className='font-semibold'>
                 {questions[currentQuestionIndex].text}
               </h1>
-              <div className='space-y-2'>
+              <div className='space-y-5'>
                 {shuffledChoices.map((choice, index) => (
                   <ul key={choice.id}>
-                    <li className='pl-7'>
+                    <li className='pl-10'>
                       <label className='flex items-center space-x-2 cursor-pointer'>
                         <input
                           type='radio'
@@ -199,7 +231,7 @@ const Page: FC<Props> = ({ params }) => {
                 ))}
               </div>
 
-              <div className='flex justify-end space-x-1'>
+              <div className='flex justify-center space-x-1'>
                 <Button
                   variant='empty'
                   className={`${
@@ -215,7 +247,22 @@ const Page: FC<Props> = ({ params }) => {
                 </Button>
 
                 {currentQuestionIndex === questions.length - 1 ? (
-                  <SubmitAssessmentsAlertdialog onSubmit={() => { submitTest(); setQuizSubmitted(true); }} />
+                  <div className='flex justify-between w-full'>
+                    <Button
+                      variant='empty'
+                      className={`${
+                        currentQuestionIndex < questions.length - 1 && answerSelected
+                          ? 'rounded-lg bg-transparent text-black transition-all'
+                          : 'rounded-lg bg-transparent text-gray transition-all'
+                      }`}
+                      onClick={goToNextQuestion}
+                      disabled={currentQuestionIndex === questions.length - 1}
+                    >
+                      next
+                      <ChevronRight />
+                    </Button>
+                    <SubmitAssessmentsAlertdialog onSubmit={() => { submitTest(); setQuizSubmitted(true); }} />
+                  </div>
                 ) : (
                   <Button
                     variant='empty'
@@ -236,15 +283,15 @@ const Page: FC<Props> = ({ params }) => {
           </div>
         ) : currentQuestionIndex < questions.length ? (
           <div key={questions[currentQuestionIndex].id} className='flex justify-center'>
-            <div className='flex-col max-w-3xl space-y-10 p-5 rounded-md shadow-[0px_3px_8px_0px_#00000024]'>
+            <div className='flex-col w-full space-y-16 px-10 py-14 rounded-lg shadow-[0px_3px_8px_0px_#00000024]'>
               <h1 className='font-semibold'>
                 {questions[currentQuestionIndex].text}
               </h1>
-              <div className='space-y-2'>
+              <div className='space-y-5'>
                 {shuffledChoices.map((choice, index) => (
-                  <ul key={choice.id}>
-                    <li className='pl-7'>
-                      <label className='flex items-center space-x-2 cursor-pointer'>
+                  <ul key={choice.id} className='flex items-center'>
+                    <li className='pl-10'>
+                      <label className='space-x-2 cursor-pointer'>
                         <input
                           type='radio'
                           name='answer'
@@ -261,7 +308,7 @@ const Page: FC<Props> = ({ params }) => {
                 ))}
               </div>
 
-              <div className='flex justify-end space-x-1'>
+              <div className='flex justify-center space-x-1'>
                 <Button
                   variant='empty'
                   className={`${
@@ -277,7 +324,23 @@ const Page: FC<Props> = ({ params }) => {
                 </Button>
 
                 {currentQuestionIndex === questions.length - 1 ? (
-                  <SubmitAssessmentsAlertdialog onSubmit={() => { submitTest(); setQuizSubmitted(true); }} />
+                  <div className='flex justify-between w-full'>
+                    <Button
+                      variant='empty'
+                      className={`${
+                        currentQuestionIndex < questions.length - 1 && answerSelected
+                          ? 'rounded-lg bg-transparent text-black transition-all'
+                          : 'rounded-lg bg-transparent text-gray transition-all'
+                      }`}
+                      onClick={goToNextQuestion}
+                      disabled={currentQuestionIndex === questions.length - 1}
+                    >
+                      next
+                      <ChevronRight />
+                    </Button>
+                    <SubmitAssessmentsAlertdialog onSubmit={() => { submitTest(); setQuizSubmitted(true); }} />
+                  </div>     
+                  
                 ) : (
                   <Button
                     variant='empty'

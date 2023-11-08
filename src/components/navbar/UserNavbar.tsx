@@ -14,7 +14,6 @@ import {
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import Profile from '../menu-item/user/Profile';
-import Settings from '../menu-item/user/Settings';
 import Log_out from '../menu-item/user/Log_out';
 
 

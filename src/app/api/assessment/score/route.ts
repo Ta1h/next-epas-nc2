@@ -20,6 +20,7 @@ export async function POST(req: NextResponse) {
     const newScore = await prisma.score.create({ 
       data: {
         lessonScore: body.lessonScore,
+        lessonLength: body.lessonLength,
         userId: body.userId,
         unitId: body.unitId,
         lessonId: body.lessonId,

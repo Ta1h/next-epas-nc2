@@ -17,38 +17,33 @@ import { signIn } from 'next-auth/react';
 
 const SignInForm = () => {
 	const router = useRouter();
-	const FormSchema = z.object({
-		email: z.string().min(1, 'Email is required').email('Invalid email'),
-		password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
-	});
-    
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm({
 		defaultValues: {
-			email: '',
-			password: '',
+		  email: '',
+		  password: '',
 		},
-	});
-
-	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+	  });
+	
+	  const onSubmit = async (values: Record<string, any>) => {
 		try {
-			// Attempt to sign in with the 'credentials' provider
-			const signInData = await signIn('credentials', {
-				email: values.email,
-				password: values.password,
-			}, { role: 'USER' });
-    
-			// Check if there was an error during sign-in
-			if (signInData?.error) {
-				console.log('sign in data error');
-				console.log(signInData.error);
-			} else {
-				router.push('/userDashboard/dashboard');
-			}
+		  // Attempt to sign in with the 'credentials' provider
+		  const signInData = await signIn('credentials', {
+			email: values.email,
+			password: values.password,
+		  }, { role: 'USER' });
+	
+		  // Check if there was an error during sign-in
+		  if (signInData?.error) {
+			console.log('sign in data error');
+			console.log(signInData.error);
+		  } else {
+			router.push('/userDashboard/dashboard');
+			console.log('pushed')
+		  }
 		} catch (error) {
-			console.error('An error occurred during sign-in:', error);
+		  console.error('An error occurred during sign-in:', error);
 		}
-	};    
+	  };    
 
 	return (
 		<div className='w-screen h-screen flex flex-row justify-center items-center'>

@@ -55,12 +55,14 @@ model CorrectAnswer {
 model Score {
   id              String        @id @default(cuid())
   lessonScore     Int           @default(0)
+  lessonLength    Int           @default(0)
   userId          String
   user            User          @relation(fields: [userId], references: [id])
   unitId          String?
-  unit            Unit?          @relation(fields: [unitId], references: [id])
+  unit            Unit?         @relation(fields: [unitId], references: [id])
   lessonId        String?
-  lesson          Lesson?        @relation(fields: [lessonId], references: [id])
+  lesson          Lesson?       @relation(fields: [lessonId], references: [id])
+  date            DateTime      @default(now())
 }
 
 model User {
