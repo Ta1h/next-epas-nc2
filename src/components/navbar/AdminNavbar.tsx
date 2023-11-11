@@ -17,6 +17,7 @@ import Image from 'next/image'
 
 const AdminNavbar = async () => {
   const session = await getServerSession(authOptions)
+
   return (
     <main className=" flex justify-end pr-16 h-20 border-b shadow-sm">
       <div className="m-2 flex justify-center items-center">

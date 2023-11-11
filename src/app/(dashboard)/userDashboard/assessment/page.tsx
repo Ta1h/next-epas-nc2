@@ -31,10 +31,7 @@ const assessment = () => {
 
   return (
     <main className="p-10">
-      <div className="flex justify-center font-semibold text-2xl pb-10">
-        ASSESSMENTS SECTION
-      </div>
-      <div className="grid lg:grid-cols-3 px-32 md:grid-cols-2 gap-7 justify-center items-center">
+      <div className="grid md:grid-cols-2 gap-7 justify-center items-center">
         {units.map((unit) => (
           <Link
             key={unit.id}

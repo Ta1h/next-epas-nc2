@@ -24,7 +24,7 @@ const UserSidebar = () => {
   return (
     <div className="border-r shadow lg:w-56">
       <div className="px-3 py-2 flex-1 justify-between h-screen">
-        <Link href="/admin" className="flex items-center mb-14">
+        <Link href="/admin" className="flex items-center mb-20">
           <div className="relative pt-5 pl-5 w-full ">
             <Image
               priority
@@ -35,7 +35,7 @@ const UserSidebar = () => {
             />
           </div>
         </Link>
-        <div className="space-y-1 lg:space-y-4">
+        <div className="space-y-1 lg:space-y-8">
           <TooltipProvider>
             {userRoutes.map((route) => (
               <Tooltip key={route.href}>

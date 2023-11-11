@@ -56,11 +56,11 @@ model Score {
   id              String        @id @default(cuid())
   lessonScore     Int           @default(0)
   lessonLength    Int           @default(0)
-  userId          String
-  user            User          @relation(fields: [userId], references: [id])
+  userEmail       String
+  user            User          @relation(fields: [userEmail], references: [email])
   unitId          String?
   unit            Unit?         @relation(fields: [unitId], references: [id])
-  lessonId        String?
+  lessonId        String?       @unique
   lesson          Lesson?       @relation(fields: [lessonId], references: [id])
   date            DateTime      @default(now())
 }

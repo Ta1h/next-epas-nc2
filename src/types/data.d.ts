@@ -1,3 +1,5 @@
+import { Score } from "@prisma/client";
+
 export type User = {
   id: string
   email: string;
@@ -10,6 +12,8 @@ export type Unit = {
 	id: string;
 	unitNumber: string;
 	unitTitle: string;
+  lessons: Lesson[],
+  score: Score[],
 };
   
 export type Lesson = {

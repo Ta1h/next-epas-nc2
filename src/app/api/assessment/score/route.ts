@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       data: {
         lessonScore: body.lessonScore,
         lessonLength: body.lessonLength,
-        userId: body.userId,
+        userEmail: body.userEmail,
         unitId: body.unitId,
         lessonId: body.lessonId,
       }, 

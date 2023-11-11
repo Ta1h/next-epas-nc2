@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import SubmitAssessmentsAlertdialog from '@/components/assessmentsAlertdialog/SubmitAssessmentsAlertdialog'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   params: { id: string }
@@ -18,9 +19,10 @@ const Page: FC<Props> = ({ params }) => {
   const [answerSelected, setAnswerSelected] = useState(false)
   const [shuffledChoices, setShuffledChoices] = useState<Choice[]>([])
   const [quizSubmitted, setQuizSubmitted] = useState(false)
-  const [retakingQuiz, setRetakingQuiz] = useState(false)
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const lessonId = params.id
+  const session = useSession();
+  const userEmail = session.data?.user.email;
 
   function shuffleArray(array: Choice[]) {
     const shuffledArray = [...array]
@@ -105,15 +107,15 @@ const Page: FC<Props> = ({ params }) => {
             body: JSON.stringify({
               lessonScore: score,
               lessonLength: questions.length,
-              userId: 'clnl4x1gv0000ae9wagg1i7kb',
+              userEmail: userEmail,
               unitId: lessonId[3],
               lessonId: lessonId[0],
             }),
           })
 
           if (response.ok) {
-            const newScore = await response.json()
-            console.log('Score submitted successfully:', newScore)
+            // const newScore = await response.json()
+            console.log('Score submitted successfully')
           } else {
             console.error('Failed to submit score')
           }
@@ -126,7 +128,8 @@ const Page: FC<Props> = ({ params }) => {
     }
   }, [score, scoreSubmitted])
 
-  const submitTest = () => {
+  const submitTest = async () => {
+    // const existingScore = lesson.score;
     let finalScore = 0
 
     questions.forEach((question) => {
@@ -145,15 +148,12 @@ const Page: FC<Props> = ({ params }) => {
     })
     setScore(finalScore)
     setScoreSubmitted(true)
-    // console.log('Final Score: ', finalScore + '/' + questions.length);
+    console.log('Final Score: ', finalScore + '/' + questions.length);
   }
 
   const retakeQuiz = () => {
-    setRetakingQuiz(true) // Set the state to start retaking the quiz
-    setQuizSubmitted(false) // Reset the quiz submission state
-    setCurrentQuestionIndex(0) // Reset the current question index
-    setUserAnswers({}) // Reset user answers
-  }
+    window.location.reload();
+  };
 
   return (
     <div className="p-10 h-full">
@@ -215,94 +215,6 @@ const Page: FC<Props> = ({ params }) => {
               <Button onClick={retakeQuiz} className="text-sm">
                 Retake
               </Button>
-            </div>
-          </div>
-        ) : retakingQuiz ? (
-          <div
-            key={questions[currentQuestionIndex].id}
-            className="flex justify-center mx-6"
-          >
-            <div className="flex-col w-full space-y-16 px-10 py-14 rounded-lg shadow-[0px_3px_8px_0px_#00000024]">
-              <h1 className="font-semibold">
-                {questions[currentQuestionIndex].text}
-              </h1>
-              <div className="space-y-5">
-                {shuffledChoices.map((choice) => (
-                  <ul key={choice.id}>
-                    <li className="pl-10">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="answer"
-                          value={choice.id}
-                          checked={
-                            userAnswers[questions[currentQuestionIndex].id] ===
-                            choice.id
-                          }
-                          onChange={() => handleAnswerClick(choice.id)}
-                        />
-                        <span>{choice.text}</span>
-                      </label>
-                    </li>
-                  </ul>
-                ))}
-              </div>
-
-              <div className="flex justify-center space-x-1">
-                <Button
-                  variant="empty"
-                  className={`${
-                    currentQuestionIndex > 0
-                      ? 'rounded-lg bg-transparent text-black transition-all'
-                      : 'rounded-lg bg-transparent text-gray transition-all'
-                  }`}
-                  onClick={goToPreviousQuestion}
-                  disabled={currentQuestionIndex === 0}
-                >
-                  <ChevronLeft />
-                  prev
-                </Button>
-
-                {currentQuestionIndex === questions.length - 1 ? (
-                  <div className="flex justify-between w-full">
-                    <Button
-                      variant="empty"
-                      className={`${
-                        currentQuestionIndex < questions.length - 1 &&
-                        answerSelected
-                          ? 'rounded-lg bg-transparent text-black transition-all'
-                          : 'rounded-lg bg-transparent text-gray transition-all'
-                      }`}
-                      onClick={goToNextQuestion}
-                      disabled={currentQuestionIndex === questions.length - 1}
-                    >
-                      next
-                      <ChevronRight />
-                    </Button>
-                    <SubmitAssessmentsAlertdialog
-                      onSubmit={() => {
-                        submitTest()
-                        setQuizSubmitted(true)
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <Button
-                    variant="empty"
-                    className={`${
-                      currentQuestionIndex < questions.length - 1 &&
-                      answerSelected
-                        ? 'rounded-lg bg-transparent text-black transition-all'
-                        : 'rounded-lg bg-transparent text-gray transition-all'
-                    }`}
-                    onClick={goToNextQuestion}
-                    disabled={currentQuestionIndex === questions.length - 1}
-                  >
-                    next
-                    <ChevronRight />
-                  </Button>
-                )}
-              </div>
             </div>
           </div>
         ) : currentQuestionIndex < questions.length ? (
