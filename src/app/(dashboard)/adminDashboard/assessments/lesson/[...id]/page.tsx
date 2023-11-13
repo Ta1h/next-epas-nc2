@@ -15,9 +15,12 @@ interface props {
 const page: FC<props> = ({ params }) => {
   const [questions, setQuestion] = useState<Array<Question>>([])
   const lessonId = params.id // uri from unit
+  const unitId = decodeURIComponent(lessonId[0])
   const lessonNumber = decodeURIComponent(lessonId[1])
   const lessonTitle = decodeURIComponent(lessonId[2])
   const selectedQuestion: Question[] = questions.filter((question) => question.lessonId === lessonId[0]).map((question)=>question)
+
+  console.log(unitId)
 
   useEffect(() => {
     async function fetchData() {
@@ -45,15 +48,8 @@ const page: FC<props> = ({ params }) => {
   return (
     <div className="p-10">
       <Link
-        href={
-          '/adminDashboard/assessments/unit/' +
-          lessonId[3] +
-          '/' +
-          lessonId[4] +
-          '/' +
-          lessonId[5]
-        }
-        className="flex text-sm text-gray-500 "
+        href={`/adminDashboard/assessments/unit/${lessonId[3]}/${lessonId[4]}/${lessonId[5]}`}
+        className="flex text-sm text-gray-500"
       >
         <ChevronLeft className="h-5" />
         <h1>back</h1>
@@ -74,7 +70,7 @@ const page: FC<props> = ({ params }) => {
               <h1 className="font-semibold">{question.text}</h1>
               <div>
                 {question.choices.map((choice, index) => (
-                  <ul key={choice.id}>
+                  <ul key={`${question.id}-${choice.id}`}>
                     <li
                       className={`pl-7 ${
                         question.correctAnswer?.choiceId === choice.id
@@ -94,39 +90,9 @@ const page: FC<props> = ({ params }) => {
             </div>
           ))
         ) : (
-          'No questions available for this lesson'
+          <p className="text-red-500">No questions available for this lesson</p>
         )}
 
-        {/* {questions.map((route) => (
-          <div key={route.id}>
-            {lessonId[0] === route.lesson.id ? (
-              <div className="flex-col w-full space-y-3 p-5 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
-                <h1 className="font-semibold">{route.text}</h1>
-                <div>
-                  {route.choices.map((choice, index) => (
-                    <ul key={choice.id}>
-                      <li
-                        className={`pl-7 ${
-                          route.correctAnswer?.choiceId === choice.id
-                            ? 'font-bold text-green-500'
-                            : ''
-                        }`}
-                      >
-                        {String.fromCharCode(97 + index)}) {choice.text}
-                      </li>
-                    </ul>
-                  ))}
-                </div>
-                <div className="flex justify-end space-x-2">
-                  <EditAssessmentsAlertdialog />
-                  <DeleteAssessmentsAlertdialog />
-                </div>
-              </div>
-            ) : (
-              'No questions for this lesson'
-            )}
-          </div>
-        ))} */}
       </div>
 
     </div>

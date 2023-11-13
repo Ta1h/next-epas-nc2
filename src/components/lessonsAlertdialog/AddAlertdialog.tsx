@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,11 +9,47 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import { Plus } from 'lucide-react'
-import { Input } from '../ui/Input'
+} from '@/components/ui/alert-dialog';
+import { Plus } from 'lucide-react';
+import { Input } from '../ui/Input';
 
-const AddAlertdialog = () => {
+const AddAlertdialog = ({ props }: any) => {
+  const [formData, setFormData] = useState({
+    lessonNumber: '',
+    title: '',
+    file: '',
+  });
+
+  const handleInputChange = (name: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleAdd = async (formData: any) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/lessons', {
+        method: 'POST',
+        body: JSON.stringify({
+          lessonNumber: formData.lessonNumber,
+          lessonTitle: formData.title,
+          lessonPdf: formData.file,
+          unitId: props,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Lesson added successfully')
+        window.location.reload();
+      } else {
+        console.error('Failed to add lesson');
+      }
+    } catch (error) {
+      console.log('Error in adding lesson: ', error);
+    }
+  };
+
   return (
     <>
       <AlertDialog>
@@ -25,14 +61,31 @@ const AddAlertdialog = () => {
           <AlertDialogHeader className="flex justify-center items-center mb-6">
             <AlertDialogTitle className="mb-6">Add Lesson</AlertDialogTitle>
             <AlertDialogDescription>
-              <Input placeholder="Lesson no." className="mb-3"></Input>
-              <Input placeholder="Title" className="mb-3"></Input>
-              <Input placeholder="File"></Input>
+              Lesson no.
+              <Input
+                placeholder="ex. Lesson 1:"
+                className="mb-4"
+                onChange={(e) => handleInputChange('lessonNumber', e.target.value)}
+              />
+              Title
+              <Input
+                placeholder="ex. OH&S policies and procedures"
+                className="mb-4"
+                onChange={(e) => handleInputChange('title', e.target.value)}
+              />
+              File
+              <Input
+                placeholder="File"
+                onChange={(e) => handleInputChange('file', e.target.value)}
+              />
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white">
+            <AlertDialogAction
+              onClick={() => handleAdd(formData)}
+              className="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white"
+            >
               <Plus className="h-5" />
               Add
             </AlertDialogAction>
@@ -40,7 +93,7 @@ const AddAlertdialog = () => {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
-}
+  );
+};
 
-export default AddAlertdialog
+export default AddAlertdialog;

@@ -56,7 +56,7 @@ const page: FC<props> = ({ params }) => {
           {unitNumber} {unitTitle}
         </h1>
         <div className="justify-end mr-10 ">
-          <AddAlertdialog />
+          <AddAlertdialog props={unitZero}/>
         </div>
       </div>
 
@@ -64,6 +64,7 @@ const page: FC<props> = ({ params }) => {
         {selectedLesson.length > 0 ? (
           selectedLesson.map((lesson)=>(
             <Link
+              key={lesson.id}
               href={''}
               className="flex-col p-5 h-40 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
             >
@@ -74,31 +75,11 @@ const page: FC<props> = ({ params }) => {
               <div className="flex justify-end items-end space-x-2">
                 <EditAlertdialog></EditAlertdialog>
                 <DeleteAlertdialog></DeleteAlertdialog>
+                
               </div>
             </Link>
           ))
         ):('No lesson')}
-        {/* {selectedLesson ? (
-          unitZero === selectedLesson.unitId ? (
-            <Link
-              href={''}
-              className="flex-col p-5 h-40 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
-            >
-              <div>
-                <h1 className="font-semibold">{selectedLesson.lessonNumber}</h1>
-                <p className="text-sm mb-4">{selectedLesson.lessonTitle}</p>
-              </div>
-              <div className="flex justify-end items-end space-x-2">
-                <EditAlertdialog></EditAlertdialog>
-                <DeleteAlertdialog></DeleteAlertdialog>
-              </div>
-            </Link>
-          ) : (
-            'No lesson'
-          )
-        ) : (
-          <p>No lesson</p>
-        )} */}
       </div>
     </div>
   )

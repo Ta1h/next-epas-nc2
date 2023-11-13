@@ -108,6 +108,15 @@ const SignInForm = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-2/4 space-y-5 flex flex-col justify-center items-center"
           >
+            <div className='w-64'>
+              <GoogleSignInButton>
+                <FcGoogle />
+                <h1 className='ml-2'>Continue with Google</h1>
+              </GoogleSignInButton>
+            </div>
+            <div>
+              <h1 className='text-gray-400'>or</h1>
+            </div>
             <FormField
               control={form.control}
               name="email"
@@ -137,12 +146,6 @@ const SignInForm = () => {
             </div>
           </form>
         </Form>
-        <div>
-          <GoogleSignInButton>
-            <FcGoogle />
-            Sign in with Google
-          </GoogleSignInButton>
-        </div>
 
         <div className="flex">
           <p className="text-xs text-gray-400">

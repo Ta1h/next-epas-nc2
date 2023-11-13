@@ -46,7 +46,10 @@ export async function DELETE(req: Request, {params} : { params: { id: string }})
     const id = params.id
     const deleted = await prisma.user.delete({
         where: {
-            id
+          id
+        },
+        include: {
+          scores: true
         }
     });
     if (!deleted) {
