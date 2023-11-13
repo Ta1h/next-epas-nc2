@@ -17,6 +17,7 @@ const page: FC<props> = ({ params }) => {
   const lessonId = params.id // uri from unit
   const lessonNumber = decodeURIComponent(lessonId[1])
   const lessonTitle = decodeURIComponent(lessonId[2])
+  const selectedQuestion: Question[] = questions.filter((question) => question.lessonId === lessonId[0]).map((question)=>question)
 
   useEffect(() => {
     async function fetchData() {
@@ -67,7 +68,36 @@ const page: FC<props> = ({ params }) => {
         </div>
       </div>
       <div className="grid justify-center items-center lg:grid-cols-2 gap-7">
-        {questions.map((route) => (
+        {selectedQuestion.length > 0 ? (
+          selectedQuestion.map((question) => (
+            <div key={question.id} className="flex-col w-full space-y-3 p-5 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
+              <h1 className="font-semibold">{question.text}</h1>
+              <div>
+                {question.choices.map((choice, index) => (
+                  <ul key={choice.id}>
+                    <li
+                      className={`pl-7 ${
+                        question.correctAnswer?.choiceId === choice.id
+                          ? 'font-bold text-green-500'
+                          : ''
+                      }`}
+                    >
+                      {String.fromCharCode(97 + index)}) {choice.text}
+                    </li>
+                  </ul>
+                ))}
+              </div>
+              <div className="flex justify-end space-x-2">
+                <EditAssessmentsAlertdialog />
+                <DeleteAssessmentsAlertdialog />
+              </div>
+            </div>
+          ))
+        ) : (
+          'No questions available for this lesson'
+        )}
+
+        {/* {questions.map((route) => (
           <div key={route.id}>
             {lessonId[0] === route.lesson.id ? (
               <div className="flex-col w-full space-y-3 p-5 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
@@ -77,7 +107,7 @@ const page: FC<props> = ({ params }) => {
                     <ul key={choice.id}>
                       <li
                         className={`pl-7 ${
-                          route.correctAnswer.choiceId === choice.id
+                          route.correctAnswer?.choiceId === choice.id
                             ? 'font-bold text-green-500'
                             : ''
                         }`}
@@ -93,11 +123,12 @@ const page: FC<props> = ({ params }) => {
                 </div>
               </div>
             ) : (
-              'no questions'
+              'No questions for this lesson'
             )}
           </div>
-        ))}
+        ))} */}
       </div>
+
     </div>
   )
 }

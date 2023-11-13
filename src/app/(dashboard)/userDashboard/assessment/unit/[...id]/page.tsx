@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { FC } from 'react'
 import { Lesson } from '@/types/data'
 import { useEffect, useState } from 'react'
+import lesson from '../../../lesson/page'
 
 interface props {
   params: { id: string }
@@ -15,7 +16,8 @@ const page: FC<props> = ({ params }) => {
   const unitZero = decodeURIComponent(unitId[0])
   const unitNumber = decodeURIComponent(unitId[1])
   const unitTitle = decodeURIComponent(unitId[2])
-  const selectedLesson = lessons.find((lesson) => lesson.unitId === unitId[0])
+  const selectedLesson: Lesson[] = lessons.filter((lesson) => lesson.unitId === unitZero).map((lesson) => lesson);
+  console.log(selectedLesson)
 
   useEffect(() => {
     async function fetchData() {
@@ -25,6 +27,7 @@ const page: FC<props> = ({ params }) => {
         })
         if (response.ok) {
           const data = await response.json()
+          console.log(data)
           setLessons(data)
         } else if (response.status === 404) {
           console.log('No units found')
@@ -54,30 +57,21 @@ const page: FC<props> = ({ params }) => {
       </h1>
 
       <div className="grid justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
-        {selectedLesson ? (
+      {selectedLesson.length > 0 ? (
+        selectedLesson.map((lesson) => (
           <Link
-            href={
-              '/userDashboard/assessment/lesson/' +
-              selectedLesson.id +
-              '/' +
-              selectedLesson.lessonNumber +
-              '/' +
-              selectedLesson.lessonTitle +
-              '/' +
-              unitZero +
-              '/' +
-              unitNumber +
-              '/' +
-              unitTitle
-            }
+            key={lesson.id} 
+            href={`/userDashboard/assessment/lesson/${lesson.id}/${lesson.lessonNumber}/${lesson.lessonTitle}/${unitZero}/${unitNumber}/${unitTitle}`}
             className="flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
           >
-            <h1 className="font-semibold">{selectedLesson.lessonNumber}</h1>
-            <p className="text-sm">{selectedLesson.lessonTitle}</p>
+            <h1 className="font-semibold">{lesson.lessonNumber}</h1>
+            <p className="text-sm">{lesson.lessonTitle}</p>
           </Link>
-        ) : (
-          <p>Loading..</p>
-        )}
+        ))
+      ) : (
+        <p>Loading..</p>
+      )}
+
       </div>
     </div>
   )
