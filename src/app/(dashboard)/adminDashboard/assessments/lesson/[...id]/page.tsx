@@ -60,7 +60,7 @@ const page: FC<props> = ({ params }) => {
           {lessonTitle}
         </h1>
         <div className="justify-end mr-10 ">
-          <AddAssessmentsAlertdialog props={lessonZero}/>
+          <AddAssessmentsAlertdialog lessonId={lessonZero}/>
         </div>
       </div>
       <div className="grid justify-center items-center lg:grid-cols-2 gap-7">

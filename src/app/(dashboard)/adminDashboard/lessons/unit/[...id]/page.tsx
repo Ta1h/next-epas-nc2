@@ -56,7 +56,7 @@ const page: FC<props> = ({ params }) => {
           {unitNumber} {unitTitle}
         </h1>
         <div className="justify-end mr-10 ">
-          <AddAlertdialog props={unitZero}/>
+          <AddAlertdialog unitId={unitZero}/>
         </div>
       </div>
 

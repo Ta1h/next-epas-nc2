@@ -4,7 +4,6 @@ import Link from 'next/link'
 import React, { FC } from 'react'
 import { Lesson } from '@/types/data'
 import { useEffect, useState } from 'react'
-import lesson from '../../../lesson/page'
 
 interface props {
   params: { id: string }

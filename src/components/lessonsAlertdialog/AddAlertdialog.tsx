@@ -13,7 +13,10 @@ import {
 import { Plus } from 'lucide-react';
 import { Input } from '../ui/Input';
 
-const AddAlertdialog = ({ props }: any) => {
+const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
+
+  console.log(unitId)
+
   const [formData, setFormData] = useState({
     lessonNumber: '',
     title: '',
@@ -27,7 +30,7 @@ const AddAlertdialog = ({ props }: any) => {
     }));
   };
 
-  const handleAdd = async (formData: any) => {
+  const handleAdd = async () => {
     const { lessonNumber, title, file } = formData;
 
     if (!lessonNumber || !title || !file) {
@@ -42,7 +45,7 @@ const AddAlertdialog = ({ props }: any) => {
           lessonNumber: formData.lessonNumber,
           lessonTitle: formData.title,
           lessonPdf: formData.file,
-          unitId: props,
+          unitId: unitId,
         }),
       });
 
@@ -90,7 +93,7 @@ const AddAlertdialog = ({ props }: any) => {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => handleAdd(formData)}
+              onClick={() => handleAdd()}
               className="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white"
             >
               <Plus className="h-5" />

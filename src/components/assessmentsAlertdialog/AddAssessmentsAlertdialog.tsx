@@ -13,7 +13,7 @@ import {
 import { Plus } from 'lucide-react'
 import { Input } from '../ui/Input'
 
-const AddAssessmentsAlertdialog = ({ props }: any) => {
+const AddAssessmentsAlertdialog: React.FC<{ lessonId: string }> = ({ lessonId }) => {
   const [question, setQuestion] = useState('');
   const [choices, setChoices] = useState(['', '', '', '']);
   const [correctAnswer, setCorrectAnswer] = useState('');
@@ -24,7 +24,7 @@ const AddAssessmentsAlertdialog = ({ props }: any) => {
         method: 'POST',
         body: JSON.stringify({
           text: question,
-          lessonId: props,
+          lessonId: lessonId,
           choices: choices.map((choice) => ({
           text: choice,
           value: choice === correctAnswer ? 1 : 0,
@@ -33,9 +33,9 @@ const AddAssessmentsAlertdialog = ({ props }: any) => {
       });
 
       console.log('Response:', response);
-      window.location.reload();
       if (response.ok) {
         console.log('Question added successfully');
+        window.location.reload();
       } else {
         console.error('Failed to add question');
       }
