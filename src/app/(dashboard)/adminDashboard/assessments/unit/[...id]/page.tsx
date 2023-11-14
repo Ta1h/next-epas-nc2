@@ -57,6 +57,7 @@ const page: FC<props> = ({ params }) => {
         {selectedLesson.length > 0 ? (
           selectedLesson.map((lesson)=>(
             <Link
+              key={lesson.id}
               href={
                 '/adminDashboard/assessments/lesson/' +
                 lesson.id +

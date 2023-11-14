@@ -20,7 +20,7 @@ const UserSidebar = () => {
   return (
     <div className="h-screen border-r shadow lg:w-60">
       <div className="px-3 py-2 flex-1">
-        <Link href="" className="flex items-center mb-14">
+        <Link href="" className="flex items-center mb-20">
           <div className="relative pt-5 px-3 w-full flex justify-between">
             <h1 className="font-black text-2xl">ADMIN</h1>
             <Image
@@ -32,7 +32,7 @@ const UserSidebar = () => {
             />
           </div>
         </Link>
-        <div className="space-y-1 lg:space-y-4">
+        <div className="space-y-1 lg:space-y-8">
           <TooltipProvider>
             {adminRoutes.map((route) => (
               <Tooltip key={route.href}>

@@ -28,6 +28,13 @@ const AddAlertdialog = ({ props }: any) => {
   };
 
   const handleAdd = async (formData: any) => {
+    const { lessonNumber, title, file } = formData;
+
+    if (!lessonNumber || !title || !file) {
+      console.error('Required fields are empty. Please fill in all fields.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3000/api/lessons', {
         method: 'POST',

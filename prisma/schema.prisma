@@ -32,7 +32,6 @@ model Question {
   lessonId      String
   lesson        Lesson         @relation(fields: [lessonId], references: [id])
   choices       Choice[]       
-  correctAnswer CorrectAnswer?
 }
 
 model Choice {
@@ -41,16 +40,8 @@ model Choice {
   questionId    String
   value         Int             @default(0)
   question      Question        @relation(fields: [questionId], references: [id])
-  CorrectAnswer CorrectAnswer[]
 }
 
-model CorrectAnswer {
-  id         String   @id @default(cuid())
-  questionId String   @unique
-  question   Question @relation(fields: [questionId], references: [id])
-  choiceId   String
-  choice     Choice   @relation(fields: [choiceId], references: [id])
-}
 
 model Score {
   id              String        @id @default(cuid())

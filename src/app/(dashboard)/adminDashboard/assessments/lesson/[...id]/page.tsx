@@ -15,12 +15,12 @@ interface props {
 const page: FC<props> = ({ params }) => {
   const [questions, setQuestion] = useState<Array<Question>>([])
   const lessonId = params.id // uri from unit
-  const unitId = decodeURIComponent(lessonId[0])
+  const lessonZero = decodeURIComponent(lessonId[0])
   const lessonNumber = decodeURIComponent(lessonId[1])
   const lessonTitle = decodeURIComponent(lessonId[2])
   const selectedQuestion: Question[] = questions.filter((question) => question.lessonId === lessonId[0]).map((question)=>question)
 
-  console.log(unitId)
+  console.log(lessonZero)
 
   useEffect(() => {
     async function fetchData() {
@@ -60,7 +60,7 @@ const page: FC<props> = ({ params }) => {
           {lessonTitle}
         </h1>
         <div className="justify-end mr-10 ">
-          <AddAssessmentsAlertdialog />
+          <AddAssessmentsAlertdialog props={lessonZero}/>
         </div>
       </div>
       <div className="grid justify-center items-center lg:grid-cols-2 gap-7">
@@ -73,7 +73,7 @@ const page: FC<props> = ({ params }) => {
                   <ul key={`${question.id}-${choice.id}`}>
                     <li
                       className={`pl-7 ${
-                        question.correctAnswer?.choiceId === choice.id
+                        choice.value > 0
                           ? 'font-bold text-green-500'
                           : ''
                       }`}

@@ -23,12 +23,6 @@ export type Lesson = {
   lessonPdf: string;
   unitId: string;
 };
-
-export type CorrectAnswer = {
-  id: string;
-  questionId: string;
-  choiceId: string;
-};
   
 export type Choice = {
   id: string;
@@ -43,6 +37,5 @@ export type Question = {
   lessonId: string;
   lesson: Lesson;
   choices: Choice[];
-  correctAnswer: CorrectAnswer;
 };
   

@@ -66,11 +66,11 @@ const page: FC<props> = ({ params }) => {
             <Link
               key={lesson.id}
               href={''}
-              className="flex-col p-5 h-40 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
+              className="flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
             >
               <div>
                 <h1 className="font-semibold">{lesson.lessonNumber}</h1>
-                <p className="text-sm mb-4">{lesson.lessonTitle}</p>
+                <p className="text-xs mb-4">{lesson.lessonTitle}</p>
               </div>
               <div className="flex justify-end items-end space-x-2">
                 <EditAlertdialog></EditAlertdialog>

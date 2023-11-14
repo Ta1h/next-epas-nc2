@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios' // You need to import Axios for making API requests
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,32 +13,36 @@ import {
 import { Plus } from 'lucide-react'
 import { Input } from '../ui/Input'
 
-const AddAssessmentsAlertdialog = () => {
-  const [question, setQuestion] = useState('')
-  const [answers, setAnswers] = useState(['', '', '', ''])
-  const [correctAnswer, setCorrectAnswer] = useState('')
+const AddAssessmentsAlertdialog = ({ props }: any) => {
+  const [question, setQuestion] = useState('');
+  const [choices, setChoices] = useState(['', '', '', '']);
+  const [correctAnswer, setCorrectAnswer] = useState('');
 
-  const handleAnswerChange = (index: number, value: string) => {
-    const newAnswers = [...answers]
-    newAnswers[index] = value
-    setAnswers(newAnswers)
-  }
-
-  const addAssessment = async () => {
-    const data = {
-      question,
-      answers,
-      correctAnswer,
-    }
-
+  const handleAdd = async () => {
     try {
-      // Send the data to your API using Axios
-      const response = await axios.post('/api/create-assessment', data)
-      console.log('Assessment added:', response.data)
+      const response = await fetch('/api/assessment/question', {
+        method: 'POST',
+        body: JSON.stringify({
+          text: question,
+          lessonId: props,
+          choices: choices.map((choice) => ({
+          text: choice,
+          value: choice === correctAnswer ? 1 : 0,
+        })),
+        }),
+      });
+
+      console.log('Response:', response);
+      window.location.reload();
+      if (response.ok) {
+        console.log('Question added successfully');
+      } else {
+        console.error('Failed to add question');
+      }
     } catch (error) {
-      console.error('Error adding assessment:', error)
+      console.error('Error in adding question: ', error);
     }
-  }
+  };
 
   return (
     <>
@@ -54,33 +57,37 @@ const AddAssessmentsAlertdialog = () => {
             <AlertDialogDescription>
               <Input
                 placeholder="Question"
-                className="mb-3"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
+                className="mb-3"
               />
               Choices:
-              {answers.map((answer, index) => (
+              {choices.map((choice, index) => (
                 <Input
                   key={index}
                   placeholder={`Answer ${index + 1}`}
+                  value={choice}
+                  onChange={(e) => {
+                    const updatedChoices = [...choices];
+                    updatedChoices[index] = e.target.value;
+                    setChoices(updatedChoices);
+                  }}
                   className="ml-7 mt-2 mb-3"
-                  value={answer}
-                  onChange={(e) => handleAnswerChange(index, e.target.value)}
                 />
               ))}
               <Input
                 placeholder="Correct Answer"
-                className="mt-3"
                 value={correctAnswer}
                 onChange={(e) => setCorrectAnswer(e.target.value)}
+                className="mt-3"
               />
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
+              onClick={handleAdd}
               className="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white"
-              onClick={addAssessment}
             >
               <Plus className="h-5" />
               Add
@@ -89,7 +96,7 @@ const AddAssessmentsAlertdialog = () => {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
-}
+  );
+};
 
-export default AddAssessmentsAlertdialog
+export default AddAssessmentsAlertdialog;
