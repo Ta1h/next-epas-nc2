@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const newScore = await prisma.score.create({ 
       data: {
+        id: body.id,
         lessonScore: body.lessonScore,
         lessonLength: body.lessonLength,
         userEmail: body.userEmail,
@@ -28,6 +29,27 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(newScore, {status: 200})    
+  } catch (error) {
+    if (error instanceof Error) {
+      // Handle the error
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
+    // Handle other cases or rethrow the error
+    throw error;
+  }
+}
+
+export async function PATCH(req: NextRequest){
+  try {
+   const body = await req.json();
+   const updateScore = await prisma.score.update({
+    where: {id: body.id},
+    data: {
+      lessonScore: body.lessonScore,
+    }
+   });
+
+   return NextResponse.json(updateScore, {status: 200}) 
   } catch (error) {
     if (error instanceof Error) {
       // Handle the error
