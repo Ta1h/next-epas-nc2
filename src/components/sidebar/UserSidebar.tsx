@@ -22,7 +22,7 @@ const UserSidebar = () => {
   // console.log(session)
 
   return (
-    <div className="border-r shadow lg:w-56">
+    <div className="bg-gray-50 border-r shadow lg:w-56">
       <div className="px-3 py-2 flex-1 justify-between h-screen">
         <Link href="/admin" className="flex items-center mb-20">
           <div className="relative pt-5 pl-5 w-full ">

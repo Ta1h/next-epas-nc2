@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 
 const Page = () => {
   const [units, setUnits] = useState<Array<Unit>>([])
-  const colors = ['bg-purple-700', 'bg-blue-700', 'bg-green-700']
+  const colors = ['bg-indigo-700', 'bg-blue-700', 'bg-green-700']
   const session = useSession();
   const userEmail = session.data?.user.email;
 

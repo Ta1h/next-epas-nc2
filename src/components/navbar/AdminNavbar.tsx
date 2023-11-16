@@ -13,7 +13,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import Profile from '../menu-item/admin/Profile'
 import Log_out from '../menu-item/admin/Log_out'
-import Image from 'next/image'
 
 const AdminNavbar = async () => {
   const session = await getServerSession(authOptions)
@@ -25,7 +24,7 @@ const AdminNavbar = async () => {
       </div>
       <div className="m-2 flex justify-center items-center">
         {session?.user.image ? (
-          <Image
+          <img
             src={session?.user.image}
             width={100}
             height={100}
@@ -33,7 +32,7 @@ const AdminNavbar = async () => {
             className="w-10 h-10 rounded-xl border"
           />
         ) : (
-          <Image
+          <img
             src="/profile.svg"
             width={100}
             height={100}
