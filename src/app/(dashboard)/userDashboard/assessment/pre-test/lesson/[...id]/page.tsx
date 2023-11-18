@@ -19,7 +19,7 @@ const Page: FC<Props> = ({ params }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [retakeScore, setRetakeScore] = useState(0);
-  const [scoreLength, setLessonLength] = useState(0)
+  const [scoreLength, setpreTestLenght] = useState(0)
   const [answerSelected, setAnswerSelected] = useState(false)
   const [shuffledChoices, setShuffledChoices] = useState<Choice[]>([])
   const [quizSubmitted, setQuizSubmitted] = useState(false)
@@ -43,8 +43,8 @@ const Page: FC<Props> = ({ params }) => {
 
   interface ScoreData {
     lessonId: string;
-    lessonScore: number;
-    lessonLength: number;
+    preTestScore: number;
+    preTestLenght: number;
   }
 
   useEffect(() => {
@@ -58,16 +58,16 @@ const Page: FC<Props> = ({ params }) => {
           const scoreDataArray: ScoreData[] = await scoreResponse.json();
   
           // Assuming lessonId[0] is the lesson ID you're interested in
-          const lessonScoreData = scoreDataArray.find(
+          const preTestScoreData = scoreDataArray.find(
             (scoreData) => scoreData.lessonId === lessonId[0]
           );
   
-          if (lessonScoreData && lessonScoreData.lessonScore !== undefined) {
+          if (preTestScoreData && preTestScoreData.preTestScore !== undefined) {
             setQuizSubmitted(true);
-            setScore(lessonScoreData.lessonScore);
-            setLessonLength(lessonScoreData.lessonLength);
+            setScore(preTestScoreData.preTestScore);
+            setpreTestLenght(preTestScoreData.preTestLenght);
           } else {
-            console.log('No lessonScore found in the response for the specified lesson.');
+            console.log('No preTestScore found in the response for the specified lesson.');
           }
         } else {
           console.log('Failed to fetch score data. Status:', scoreResponse.status);
@@ -154,8 +154,8 @@ const Page: FC<Props> = ({ params }) => {
             method: 'POST',
             body: JSON.stringify({
               id: lessonId[3]+lessonId[0],
-              lessonScore: score,
-              lessonLength: scoreLength,
+              preTestScore: score,
+              preTestLenght: scoreLength,
               userEmail: userEmail,
               unitId: lessonId[3],
               lessonId: lessonId[0],
@@ -202,7 +202,7 @@ const Page: FC<Props> = ({ params }) => {
     );
   
     setScore(finalScore);
-    setLessonLength(totalPossibleScore);
+    setpreTestLenght(totalPossibleScore);
     setScoreSubmitted(true);
     console.log('Final Score: ', finalScore + '/' + totalPossibleScore);
   };  
@@ -246,11 +246,9 @@ const Page: FC<Props> = ({ params }) => {
         method: 'PATCH',
         body: JSON.stringify({
           id: scoreId,
-          lessonScore: retakeScore,
+          preTestScore: retakeScore,
         }),
       });
-
-      
 
       console.log('insde PATCH: ',response.json())
 
@@ -274,7 +272,7 @@ const Page: FC<Props> = ({ params }) => {
     <div className="p-10 h-full">
       <Link
         href={
-          '/userDashboard/assessment/unit/' +
+          '/userDashboard/assessment/pre-test/unit/' +
           lessonId[3] +
           '/' +
           lessonId[4] +
@@ -284,7 +282,7 @@ const Page: FC<Props> = ({ params }) => {
         className="flex text-sm text-gray-500"
       >
         <ChevronLeft className="h-5" />
-        <h1>Back</h1>
+        <h1>Assessment | Pre-Test | Unit</h1>
       </Link>
       <div className="flex mb-12 ml-2">
         <h1 className="font-semibold w-full text-xl">
@@ -309,9 +307,7 @@ const Page: FC<Props> = ({ params }) => {
               <div className="flex-col mb-5">
                 <h1 className="text-3xl font-semibold text-red-600">Failed!</h1>
                 <p>
-                  You have failed the test the passing rate is 80 percent. You
-                  can go to the recommended lesson to review and retake the
-                  test.
+                  This test is not recorded, it&apos;s designed to help you for your Post-Test.
                 </p>
               </div>
             )}

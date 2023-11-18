@@ -44,11 +44,11 @@ const page: FC<props> = ({ params }) => {
   return (
     <div className="p-10">
       <Link
-        href={'/userDashboard/assessment'}
+        href={'/userDashboard/assessment/pre-test'}
         className="flex text-sm text-gray-500 "
       >
         <ChevronLeft className="h-5" />
-        <h1>Assessment</h1>
+        <h1>Assessment | Pre-Test</h1>
       </Link>
       <h1 className="font-semibold text-xl pl-2 pb-10">
         {unitNumber}
@@ -60,7 +60,7 @@ const page: FC<props> = ({ params }) => {
         selectedLesson.map((lesson) => (
           <Link
             key={lesson.id} 
-            href={`/userDashboard/assessment/lesson/${lesson.id}/${lesson.lessonNumber}/${lesson.lessonTitle}/${unitZero}/${unitNumber}/${unitTitle}`}
+            href={`/userDashboard/assessment/pre-test/lesson/${lesson.id}/${lesson.lessonNumber}/${lesson.lessonTitle}/${unitZero}/${unitNumber}/${unitTitle}`}
             className="flex-col p-5 h-36 rounded-md hover:bg-gray-50 shadow-[0px_3px_8px_0px_#00000024]"
           >
             <h1 className="font-semibold">{lesson.lessonNumber}</h1>
