@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
     const newScore = await prisma.score.create({ 
       data: {
         id: body.id,
+        preTestScore: body.preTestScore,
+        preTestLenght: body.preTestLenght,
         lessonScore: body.lessonScore,
         lessonLength: body.lessonLength,
         userEmail: body.userEmail,
@@ -45,6 +47,8 @@ export async function PATCH(req: NextRequest){
    const updateScore = await prisma.score.update({
     where: {id: body.id},
     data: {
+      preTestScore: body.preTestScore,
+      preTestLenght: body.preTestLenght,
       lessonScore: body.lessonScore,
     }
    });

@@ -42,14 +42,14 @@ const Page = () => {
   }, [])
 
   return (
-    <div className="p-10 h-full space-y-7">
+    <div className="bg-gray-50 p-10 h-full space-y-7">
       {units.map((unit, index) => (
         <div key={unit.id} className="flex-col rounded-md w-full shadow-[0px_3px_8px_0px_#00000024] min-h-80">
           <h1 className={`${colors[index]} text-2xl pl-5 py-3 text-white rounded-t-md`}>
             {unit.unitNumber}
             {unit.unitTitle}
           </h1>
-          <div className="p-7 grid lg:grid-cols-3 lg:gap-5">
+          <div className="bg-white p-7 grid lg:grid-cols-3 lg:gap-5 rounded-2xl">
             {unit.lessons
               .filter((lesson) =>
                 unit.score.some(
@@ -60,7 +60,7 @@ const Page = () => {
                 )
               )
               .map((lesson) => (
-                <div key={lesson.id} className="flex-col h-full p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
+                <div key={lesson.id} className="bg-white flex-col h-full p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
                   {unit.score
                     .filter(
                       (scores) =>

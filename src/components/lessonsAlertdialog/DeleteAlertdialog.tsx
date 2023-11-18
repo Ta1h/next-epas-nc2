@@ -1,5 +1,5 @@
-import { FileX2 } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react';
+import { FileX2 } from 'lucide-react';
 import {
   AlertDialogHeader,
   AlertDialogFooter,
@@ -10,9 +10,39 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from '../ui/alert-dialog'
+} from '../ui/alert-dialog';
 
-const DeleteAlertdialog = () => {
+interface type {
+  lessonId: string
+}
+
+const DeleteAlertdialog = ({ lessonId } : type) => {
+  const [isDeleting, setIsDeleting] = useState(false); 
+
+  console.log(isDeleting)
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/lessons/id/${lessonId}`, {
+        method: 'DELETE',
+      });
+
+
+      if (response.ok) {
+
+        console.log('Lesson deleted successfully');
+        window.location.reload();
+      } else {
+        console.error('Error deleting lesson');
+      }
+    } catch (error) {
+      console.error('Error deleting lesson: ', error);
+    } finally {
+
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <>
       <AlertDialog>
@@ -29,8 +59,16 @@ const DeleteAlertdialog = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-white text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white px-4 py-2 flex items-center text-sm rounded-md">
+            <AlertDialogCancel onClick={() => setIsDeleting(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-white text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white px-4 py-2 flex items-center text-sm rounded-md"
+              onClick={() => {
+                setIsDeleting(true);
+                handleDelete();
+              }}
+            >
               <FileX2 className="h-4" />
               Delete
             </AlertDialogAction>
@@ -38,7 +76,7 @@ const DeleteAlertdialog = () => {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
-}
+  );
+};
 
-export default DeleteAlertdialog
+export default DeleteAlertdialog;

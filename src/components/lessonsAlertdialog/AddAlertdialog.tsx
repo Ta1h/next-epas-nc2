@@ -15,8 +15,6 @@ import { Input } from '../ui/Input';
 
 const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
 
-  console.log(unitId)
-
   const [formData, setFormData] = useState({
     lessonNumber: '',
     title: '',
@@ -85,8 +83,12 @@ const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
               />
               File
               <Input
+                type='file'
+                required
+                accept='application/pdf'
                 placeholder="File"
                 onChange={(e) => handleInputChange('file', e.target.value)}
+                className='flex border border-black'
               />
             </AlertDialogDescription>
           </AlertDialogHeader>

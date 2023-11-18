@@ -21,7 +21,6 @@ export async function POST(req: NextRequest) {
       data: {
         lessonNumber: body.lessonNumber,
         lessonTitle: body.lessonTitle,
-        lessonPdf: body.lessonPdf,
         unitId: body.unitId,
       },
     });
@@ -34,3 +33,5 @@ export async function POST(req: NextRequest) {
     throw error;
   }
 }
+
+

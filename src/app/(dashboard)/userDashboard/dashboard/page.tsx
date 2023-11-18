@@ -87,7 +87,7 @@ const page = async () => {
           >
             <div className='flex w-full justify-center items-center'>
               <div>
-                <h1 className='flex'>{section.title}</h1>
+                <h1 className='flex font-semibold tracking-wider'>{section.title}</h1>
               </div>
               <Image
                 priority

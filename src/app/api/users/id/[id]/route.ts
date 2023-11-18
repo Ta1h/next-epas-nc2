@@ -52,9 +52,9 @@ export async function DELETE(req: Request, {params} : { params: { id: string }})
           scores: true
         }
     });
-    if (!deleted) {
+      if (!deleted) {
         return NextResponse.json({ message: "No users id found" }, { status: 404 });
-    }
+      }
         return NextResponse.json({ message: "OK", deleted }, { status: 200 });
     } catch (error) {
       console.log(error);
