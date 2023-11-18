@@ -19,7 +19,6 @@ model Lesson {
   id              String   @id @default(cuid())
   lessonNumber    String
   lessonTitle     String
-  lessonPdf       String
   unitId          String
   unit            Unit     @relation(fields: [unitId], references: [id])
   questions       Question[]
@@ -45,6 +44,8 @@ model Choice {
 
 model Score {
   id              String        @id @default(cuid())
+  preTestScore    Int           @default(0)
+  preTestLenght   Int           @default(0)
   lessonScore     Int           @default(0)
   lessonLength    Int           @default(0)
   userEmail       String

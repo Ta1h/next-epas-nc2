@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Score" ADD COLUMN     "preTestLenght" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "preTestScore" INTEGER NOT NULL DEFAULT 0;

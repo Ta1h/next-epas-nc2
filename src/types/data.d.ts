@@ -20,7 +20,7 @@ export type Lesson = {
   id: string;
   lessonNumber: string;
   lessonTitle: string;
-  lessonPdf: string;
+  lessonPdf: bytes;
   unitId: string;
 };
   

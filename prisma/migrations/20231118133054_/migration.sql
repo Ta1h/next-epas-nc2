@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Score" ALTER COLUMN "lessonScore" DROP DEFAULT,
+ALTER COLUMN "lessonLength" DROP DEFAULT;
