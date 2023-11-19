@@ -10,10 +10,8 @@ import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 const AdminSignInForm = () => {
-  const router = useRouter()
   const FormSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
     password: z
@@ -38,8 +36,9 @@ const AdminSignInForm = () => {
         {
           email: values.email,
           password: values.password,
+          role: 'ADMIN',
+          callbackUrl: '/adminDashboard/dashboard'
         },
-        { role: 'ADMIN' },
       )
 
       // Check if there was an error during sign-in
@@ -48,7 +47,6 @@ const AdminSignInForm = () => {
         console.log(signInData.error) // Log the specific error details
       } else {
         try {
-          router.push('/adminDashboard/dashboard')
           console.log('pushed') // Redirect the user to the '/userDashboard' page
         } catch (error) {
           console.log('inside error: ', error)

@@ -8,7 +8,6 @@ import { signIn } from 'next-auth/react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import GoogleSignInButton from '@/components/GoogleSignInButton';
-import { useRouter } from 'next/navigation';
 
 interface FormData {
   email: string;
@@ -16,7 +15,6 @@ interface FormData {
 }
 
 const SignInForm = () => {
-  const router = useRouter()
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
@@ -27,31 +25,6 @@ const SignInForm = () => {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
-  };
-
-  const signInWithoutForm = async () => {
-    try {
-      // Attempt to sign in with the 'credentials' provider
-      const signInData = await signIn(
-        'credentials',
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        { role: 'USER' },
-      );
-
-      // Check if there was an error during sign-in
-      if (signInData?.error) {
-        console.log('sign in data error');
-        console.log(signInData.error);
-      } else {
-        router.push('/userDashboard/dashboard');
-        console.log('pushed');
-      }
-    } catch (error) {
-      console.error('An error occurred during sign-in:', error);
-    }
   };
 
   return (
@@ -131,7 +104,10 @@ const SignInForm = () => {
           />
 
           <div className="flex flex-col space-y-3 w-64">
-            <Button variant="default" onClick={signInWithoutForm}>
+            <Button variant="default" onClick={() => signIn(
+              'credentials',
+              {email: formData.email, password: formData.password, role: 'USER', callbackUrl: '/userDashboard/dashboard'}
+            )}>
               Sign In
             </Button>
           </div>
