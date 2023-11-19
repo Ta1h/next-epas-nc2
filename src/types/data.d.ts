@@ -21,7 +21,7 @@ export type Lesson = {
   id: string;
   lessonNumber: string;
   lessonTitle: string;
-  lessonUrl: String;
+  lessonUrl: string;
   unitId: string;
 };
   
