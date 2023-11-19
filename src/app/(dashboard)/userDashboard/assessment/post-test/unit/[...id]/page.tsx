@@ -42,7 +42,7 @@ const page: FC<props> = ({ params }) => {
   }, [])
 
   return (
-    <div className="p-10">
+    <div className="px-10 pt-6">
       <Link
         href={'/userDashboard/assessment/post-test'}
         className="flex text-sm text-gray-500 "

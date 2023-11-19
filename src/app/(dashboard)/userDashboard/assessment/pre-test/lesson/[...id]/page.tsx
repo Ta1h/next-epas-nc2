@@ -269,7 +269,7 @@ const Page: FC<Props> = ({ params }) => {
   }; 
 
   return (
-    <div className="p-10 h-full">
+    <div className="px-10 pt-6 h-full">
       <Link
         href={
           '/userDashboard/assessment/pre-test/unit/' +

@@ -147,9 +147,10 @@ const Page: FC<Props> = ({ params }) => {
     if (scoreSubmitted) {
       const submitScoreToAPI = async () => {
         try {
-          const response = await fetch('/api/assessment/score', {
+          const response = await fetch(`/api/assessment/score/id/${lessonId[3]+lessonId[0]}`, {
             method: 'PATCH',
             body: JSON.stringify({
+              id: lessonId[3]+lessonId[0],
               lessonScore: score,
               lessonLength: scoreLength,
             }),
@@ -235,10 +236,10 @@ const Page: FC<Props> = ({ params }) => {
 
       console.log('after map: ',retakeScore);
 
-      const response = await fetch('/api/assessment/score', {
+      const response = await fetch(`/api/assessment/score/id/${lessonId[3]+lessonId[0]}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          id: scoreId,
+          id: lessonId[3]+lessonId[0],
           lessonScore: retakeScore,
         }),
       });
@@ -262,7 +263,7 @@ const Page: FC<Props> = ({ params }) => {
   }; 
 
   return (
-    <div className="p-10 h-full">
+    <div className="px-10 pt-6 h-full">
       <Link
         href={
           '/userDashboard/assessment/post-test/unit/' +

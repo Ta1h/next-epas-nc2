@@ -1,12 +1,12 @@
 "use client"
 import React from 'react'
-import { Calendar } from "@/components/ui/calendar"
 import { Progress } from "@/components/ui/progress"
 import Image from 'next/image'
 import Link from 'next/link'
+import Calendar from './components/calendar'
 
 const page = async () => {
-  const [date] = React.useState<Date | undefined>(new Date())
+  
   const unit = [
     {
       image: '/unit1.svg',
@@ -74,11 +74,9 @@ const page = async () => {
             ))}
           </div>
         </div>
-        <Calendar
-          mode='single'
-          selected={date}
-          className="bg-gray-50 lg:col-span-3 mx-auto object-contain rounded-2xl shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]" 
-        />
+        <div className='w-auto mx-auto'>
+          <Calendar/>
+        </div>
         {sections.map((section, index) => (
           <Link
             href={section.link}

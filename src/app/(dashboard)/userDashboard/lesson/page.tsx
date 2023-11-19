@@ -33,10 +33,10 @@ const lesson = () => {
   }, [])
 
   return (
-    <main className="px-16 py-5">
+    <main className="px-10 pt-5">
       <div className="grid lg:grid-cols-4 gap-16">
         <div className='col-span-2 flex justify-center items-center'>
-          <div className='flex-cols grid lg:grid-cols-2 px-10 py-7 h-full bg-[#6F2DBD] text-[#A0BDE4] indent-1 rounded-xl'>
+          <div className='flex-cols grid lg:grid-cols-2 px-10 py-5 h-full bg-[#6F2DBD] text-[#A0BDE4] indent-1 rounded-xl'>
             <h1 className='font-black text-2xl tracking-wider col-span-2 mb-5'>Guidelines & Notice!</h1>
             <Image
               priority
@@ -71,21 +71,22 @@ const lesson = () => {
               src={'/notice-assessment.svg'}
               className='mx-auto w-auto h-40'
             />
-            <div className='pt-10'>
+            <div className='pt-5'>
               <h2 className='font-bold tracking-wide'>3) Assessment</h2>
               <p className='pl-2 text-xs'>- If you want to advance, after the pre-test you can already proceed to the assessment</p>
               <p className='pl-2 text-xs'>- The assessment is also the same with the pre-test so take your time to learn and enjoy :)</p>
             </div>
-            <Link 
-              href={'/userDashboard/assessment/pre-test'}
-              className='col-span-2 grid justify-center mt-6'
-            >
-              <h1 className='p-2 border border-[#A0BDE4] hover:bg-[#A0BDE4] hover:text-[#6F2DBD] flex text-xs rounded-lg'>
-                <Pencil className='h-4'/>
-                Pre-Test
-                <ChevronRight className='h-4'/>
-              </h1>
-            </Link>
+            <div className='col-span-2 grid justify-center mt-4'>
+              <Link 
+                href={'/userDashboard/assessment/pre-test'}
+              >
+                <h1 className='p-2 border border-[#A0BDE4] hover:bg-[#A0BDE4] hover:text-[#6F2DBD] flex text-xs rounded-lg'>
+                  <Pencil className='h-4'/>
+                  Pre-Test
+                  <ChevronRight className='h-4'/>
+                </h1>
+              </Link>
+            </div>
           </div>
         </div>
         <div className='w-full col-span-2 grid items-center'>

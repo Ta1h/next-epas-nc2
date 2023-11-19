@@ -31,7 +31,7 @@ const preTest = () => {
   }, [])
 
   return (
-    <main className="p-10">
+    <main className="px-10 pt-6">
         <Link
             href={'/userDashboard/assessment'}
             className="flex text-sm text-gray-500 "
