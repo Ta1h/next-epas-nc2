@@ -4,7 +4,6 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Unit } from '@/types/data'
 import Image from 'next/image'
-import { Pencil, ChevronRight } from 'lucide-react'
 
 const assessment = () => {
   const [units, setUnits] = useState<Array<Unit>>([])
@@ -55,7 +54,7 @@ const assessment = () => {
             <div className='pt-6'>
               <h2 className='font-bold tracking-wide'>2) Recommendation</h2>
               <p className='pl-2 text-xs'>- After you take the post-test if you fail the test your scores will be visible to the recommended section.</p>
-              <p className='pl-2 text-xs'>- In the recommended section you'll be able to view your scores data with unit and lesson </p>
+              <p className='pl-2 text-xs'>- In the recommended section you&apos;ll be able to view your scores data with unit and lesson </p>
             </div>
             <Image
               priority

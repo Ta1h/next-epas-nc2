@@ -236,10 +236,10 @@ const Page: FC<Props> = ({ params }) => {
 
       console.log('after map: ',retakeScore);
 
-      const response = await fetch(`/api/assessment/score/id/${lessonId[3]+lessonId[0]}`, {
+      const response = await fetch(`/api/assessment/score/id/${scoreId}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          id: lessonId[3]+lessonId[0],
+          id: scoreId,
           lessonScore: retakeScore,
         }),
       });
