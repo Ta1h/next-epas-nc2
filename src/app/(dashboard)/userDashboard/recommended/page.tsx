@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { Unit, Lesson } from '@/types/data'
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { Book, FileText } from 'lucide-react';
 
 const Page = () => {
   const [units, setUnits] = useState<Array<Unit>>([])
@@ -60,7 +62,7 @@ const Page = () => {
                 )
               )
               .map((lesson) => (
-                <div key={lesson.id} className="bg-white flex-col h-full p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
+                <div key={lesson.id} className="bg-white flex-col w-auto h-auto p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
                   {unit.score
                     .filter(
                       (scores) =>
@@ -73,8 +75,33 @@ const Page = () => {
                       <div key={latestScore.id}>
                         {latestScore.lessonScore < 0.6 * latestScore.lessonLength && (
                           <div>
-                            <h2 className='text-xl font-semibold'>{lesson.lessonNumber}</h2>
-                            <h2 className='h-16 flex items-center'>{lesson.lessonTitle}</h2>
+                            <div className='flex'>
+                              <div className='flex-cols'>
+                                <h2 className='text-xl font-semibold'>{lesson.lessonNumber}</h2>
+                                <h2 className='mb-12 mt-4 flex items-center'>Title: {lesson.lessonTitle}</h2>
+                              </div>
+                              <div className='grid justify-end w-28 mr-4 h-fit'>
+                                
+                                <h2 className='h-fit w-fit mb-4 font-bold mt-1'>Links:</h2> 
+                                <Link 
+                                  href={'/userDashboard/lesson/lesson/'+lesson.id+'/'+lesson.lessonNumber+'/'+lesson.lessonTitle+'/'+unit.id+'/'+unit.unitNumber+'/'+unit.unitTitle}
+                                  className='flex w-fit h-fit font-medium hover:text-[#6F2DBD] underline-offset-4 hover:underline transition-all origin-left duration-100 mb-1'
+                                  >
+                                  <Book className='w-4'/>
+                                  Lesson
+                                </Link>
+                                <Link 
+                                  href={'/userDashboard/assessment/post-test/lesson/'+lesson.id+'/'+lesson.lessonNumber+'/'+lesson.lessonTitle+'/'+unit.id+'/'+unit.unitNumber+'/'+unit.unitTitle}
+                                  className='flex w-fit h-fit font-medium hover:text-[#6F2DBD] underline-offset-4 hover:underline transition-all origin-left duration-100'
+                                  >
+                                  <FileText className='w-4'/>
+                                  Post-Test
+                                </Link>
+                              </div>
+                            </div>
+
+                            
+
                             <div className='text-sm grid lg:grid-cols-3 justify-center border-2 rounded-md px-1'>
                               <p>Score: </p>
                               <p>Time: </p>
