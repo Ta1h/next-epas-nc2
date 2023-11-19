@@ -42,7 +42,7 @@ const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
         body: JSON.stringify({
           lessonNumber: formData.lessonNumber,
           lessonTitle: formData.title,
-          lessonPdf: formData.file,
+          lessonUrl: formData.file,
           unitId: unitId,
         }),
       });
@@ -81,14 +81,10 @@ const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
                 className="mb-4"
                 onChange={(e) => handleInputChange('title', e.target.value)}
               />
-              File
+              File Url
               <Input
-                type='file'
-                required
-                accept='application/pdf'
-                placeholder="File"
+                placeholder="ex. https://docs.google.com/document/d/1ytOkjMK7ioDNNKpCh-WJLMlmttx6sQaO/preview"
                 onChange={(e) => handleInputChange('file', e.target.value)}
-                className='flex border border-black'
               />
             </AlertDialogDescription>
           </AlertDialogHeader>

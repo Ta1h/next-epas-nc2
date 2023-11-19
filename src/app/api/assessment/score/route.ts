@@ -41,26 +41,4 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function PATCH(req: NextRequest){
-  try {
-   const body = await req.json();
-   const updateScore = await prisma.score.update({
-    where: {id: body.id},
-    data: {
-      preTestScore: body.preTestScore,
-      preTestLenght: body.preTestLenght,
-      lessonScore: body.lessonScore,
-    }
-   });
-
-   return NextResponse.json(updateScore, {status: 200}) 
-  } catch (error) {
-    if (error instanceof Error) {
-      // Handle the error
-      return NextResponse.json({ message: error.message }, { status: 500 });
-    }
-    // Handle other cases or rethrow the error
-    throw error;
-  }
-}
 

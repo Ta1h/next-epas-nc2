@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
       data: {
         lessonNumber: body.lessonNumber,
         lessonTitle: body.lessonTitle,
+        lessonUrl: body.lessonUrl,
         unitId: body.unitId,
       },
     });
