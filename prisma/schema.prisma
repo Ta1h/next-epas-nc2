@@ -19,6 +19,7 @@ model Lesson {
   id              String   @id @default(cuid())
   lessonNumber    String
   lessonTitle     String
+  lessonUrl       String
   unitId          String
   unit            Unit     @relation(fields: [unitId], references: [id])
   questions       Question[]

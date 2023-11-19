@@ -4,6 +4,7 @@ export type User = {
   id: string
   email: string;
   name: string | null;
+  password: string;
   role: string;
   created: string;
 };
@@ -20,7 +21,7 @@ export type Lesson = {
   id: string;
   lessonNumber: string;
   lessonTitle: string;
-  lessonPdf: bytes;
+  lessonUrl: String;
   unitId: string;
 };
   

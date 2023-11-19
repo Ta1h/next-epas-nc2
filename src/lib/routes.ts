@@ -23,9 +23,14 @@ export const userRoutes = [
     },
     {
       label: "Score",
-      icon: Icons.BarChart4,
+      icon: Icons.Award,
       href: "/userDashboard/score",
-    }, 
+    },
+    {
+      label: "Media",
+      icon: Icons.Presentation,
+      href: "/userDashboard/media",
+    },
 ];
 
 export const adminRoutes = [
@@ -50,9 +55,9 @@ export const adminRoutes = [
       href: "/adminDashboard/assessments",
     },
     {
-      label: "Top Scores",
-      icon: Icons.BarChart4,
-      href: "/adminDashboard/scores",
+      label: "Media",
+      icon: Icons.Presentation,
+      href: "/userDashboard/media",
     },
 ];
 

@@ -1,4 +1,6 @@
 import {
+  Award,
+  Presentation,
   ThumbsUp,
   Users2,
   Book,
@@ -22,6 +24,8 @@ import {
 } from 'lucide-react'
 
 export const Icons = {
+  Award,
+  Presentation,
   ThumbsUp,
   Users2,
   Book,

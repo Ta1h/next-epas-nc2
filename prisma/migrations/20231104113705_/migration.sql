@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Choice" ADD COLUMN     "value" INTEGER NOT NULL DEFAULT 0;
