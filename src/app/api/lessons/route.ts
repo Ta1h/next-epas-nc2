@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const lessons = await prisma.lesson.findMany();
+    const lessons = await prisma.lesson.findMany({
+      include: {
+        score: true
+      }
+    });
     if (!lessons || lessons.length === 0) {
       return NextResponse.json({ message: "No lessons found" }, { status: 404 });
     }

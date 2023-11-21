@@ -74,7 +74,7 @@ const page: FC<props> = ({ params }) => {
                 <p className="text-xs mb-4 object-contain overflow-hidden">{lesson.lessonUrl}</p>
               </div>
               <div className="object-contain flex justify-end items-end space-x-2">
-                <EditAlertdialog></EditAlertdialog>
+                <EditAlertdialog lessonId={lesson.id}></EditAlertdialog>
                 <DeleteAlertdialog lessonId={lesson.id}></DeleteAlertdialog>
                 
               </div>

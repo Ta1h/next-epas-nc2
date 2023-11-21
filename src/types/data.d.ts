@@ -1,7 +1,7 @@
 import { Score } from "@prisma/client";
 
 export type User = {
-  id: string
+  id: string;
   email: string;
   name: string | null;
   password: string;
@@ -39,4 +39,6 @@ export type Question = {
   lesson: Lesson;
   choices: Choice[];
 };
+
+
   

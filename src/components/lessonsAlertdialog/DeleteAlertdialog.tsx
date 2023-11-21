@@ -27,7 +27,6 @@ const DeleteAlertdialog = ({ lessonId } : type) => {
         method: 'DELETE',
       });
 
-
       if (response.ok) {
 
         console.log('Lesson deleted successfully');
