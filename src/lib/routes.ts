@@ -55,9 +55,9 @@ export const adminRoutes = [
       href: "/adminDashboard/assessments",
     },
     {
-      label: "Media",
+      label: "Medias",
       icon: Icons.Presentation,
-      href: "/userDashboard/media",
+      href: "/adminDashboard/medias",
     },
 ];
 

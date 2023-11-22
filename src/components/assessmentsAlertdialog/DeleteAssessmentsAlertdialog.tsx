@@ -24,8 +24,7 @@ const DeleteAssessmentsAlertdialog = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              user account and remove the user data from our database.
+              This action cannot be undone. This will permanently delele the Question, Choices, and the Answer.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

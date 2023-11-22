@@ -1,6 +1,5 @@
 import React from 'react'
 import { ChevronDown } from 'lucide-react'
-import { Input } from '../ui/Input'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +10,6 @@ import {
 } from '@/components/ui/Dropdown-menu'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import Profile from '../menu-item/admin/Profile'
 import Log_out from '../menu-item/admin/Log_out'
 
 const AdminNavbar = async () => {
@@ -20,24 +18,21 @@ const AdminNavbar = async () => {
   return (
     <main className=" flex justify-end pr-16 h-20 border-b shadow-sm">
       <div className="m-2 flex justify-center items-center">
-        <Input placeholder="Search.."></Input>
-      </div>
-      <div className="m-2 flex justify-center items-center">
         {session?.user.image ? (
           <img
             src={session?.user.image}
             width={100}
             height={100}
             alt=""
-            className="w-10 h-10 rounded-xl border"
+            className="w-10 h-9 rounded-xl border"
           />
         ) : (
           <img
             src="/profile.svg"
-            width={100}
-            height={100}
+            width={200}
+            height={200}
             alt=""
-            className="w-10 h-10 rounded-xl border"
+            className="w-10 h-9 rounded-xl border"
           />
         )}
         <div className="hidden lg:flex justify-between items-center ml-2">
@@ -61,9 +56,6 @@ const AdminNavbar = async () => {
               My Account
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Profile></Profile>
-            </DropdownMenuItem>
             <DropdownMenuItem>
               <Log_out></Log_out>
             </DropdownMenuItem>

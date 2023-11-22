@@ -62,27 +62,26 @@ const Page = () => {
                 )
               )
               .map((lesson) => (
-                <div key={lesson.id} className="bg-white flex-col w-auto h-auto p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
+                <div key={lesson.id} className="bg-white flex-col w-auto max-h-80 p-3 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
                   {unit.score
                     .filter(
                       (scores) =>
                         scores.userEmail === userEmail &&
                         scores.lessonId === lesson.id 
                     )
-                    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort scores by date in descending order
-                    .slice(0, 1) // Take only the latest score
+                    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) 
+                    .slice(0, 1) 
                     .map((latestScore) => (
-                      <div key={latestScore.id}>
+                      <div key={latestScore.id} className='h-full'>
                         {latestScore.lessonScore < 0.6 * latestScore.lessonLength && (
-                          <div>
-                            <div className='flex'>
-                              <div className='flex-cols'>
+                          <div className='grid grid-row-5 h-full '>
+                            <div className='grid row-span-4 grid-cols-6 justify-between w-full h-full'>
+                              <div className='col-span-4 '>
                                 <h2 className='text-xl font-semibold'>{lesson.lessonNumber}</h2>
-                                <h2 className='mb-12 mt-4 flex items-center'>Title: {lesson.lessonTitle}</h2>
+                                <h2 className='mb-12 mt-4 flex items-center'> Title: {lesson.lessonTitle}</h2>
                               </div>
-                              <div className='grid justify-end w-28 mr-4 h-fit'>
-                                
-                                <h2 className='h-fit w-fit mb-4 font-bold mt-1'>Links:</h2> 
+                              <div className='grid w-28 h-fit'>
+                                <h2 className='h-fit w-fit mb-4 font-bold text-[#6F2DBD]'>Links:</h2> 
                                 <Link 
                                   href={'/userDashboard/lesson/lesson/'+lesson.id+'/'+lesson.lessonNumber+'/'+lesson.lessonTitle+'/'+unit.id+'/'+unit.unitNumber+'/'+unit.unitTitle}
                                   className='flex w-fit h-fit font-medium hover:text-[#6F2DBD] underline-offset-4 hover:underline transition-all origin-left duration-100 mb-1'
@@ -100,9 +99,7 @@ const Page = () => {
                               </div>
                             </div>
 
-                            
-
-                            <div className='text-sm grid lg:grid-cols-3 justify-center border-2 rounded-md px-1'>
+                            <div className='text-red-600 font-semibold h-fit text-sm grid lg:grid-cols-3 justify-center border-2 rounded-md px-1'>
                               <p>Score: </p>
                               <p>Time: </p>
                               <p>Date: </p>
@@ -112,7 +109,6 @@ const Page = () => {
                             </div>
                           </div> 
                         )}
-                        
                       </div>
                     ))}
                 </div>

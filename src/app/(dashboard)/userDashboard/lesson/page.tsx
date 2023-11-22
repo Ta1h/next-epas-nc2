@@ -33,7 +33,7 @@ const lesson = () => {
   }, [])
 
   return (
-    <main className="px-10 pt-5">
+    <main className="p-20 pt-5">
       <div className="grid lg:grid-cols-4 gap-16">
         <div className='col-span-2 flex justify-center items-center'>
           <div className='flex-cols grid lg:grid-cols-2 px-10 py-5 h-full bg-[#6F2DBD] text-[#A0BDE4] indent-1 rounded-xl'>

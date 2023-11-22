@@ -84,7 +84,7 @@ const page: FC<props> = ({ params }) => {
                 ))}
               </div>
               <div className="flex justify-end space-x-2">
-                <EditAssessmentsAlertdialog />
+                <EditAssessmentsAlertdialog lessonId={lessonZero}/>
                 <DeleteAssessmentsAlertdialog />
               </div>
             </div>

@@ -46,7 +46,7 @@ const page: FC<props> = ({ params }) => {
         className="flex text-sm text-gray-500 "
       >
         <ChevronLeft className="h-5" />
-        <h1>Lesson</h1>
+        <h1>Lesson Section</h1>
       </Link>
       <div className="flex">
         <h1 className="font-semibold w-full text-xl pl-2 pb-10">

@@ -1,19 +1,50 @@
-import { FileEdit } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import {
-  AlertDialogHeader,
-  AlertDialogFooter,
   AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
   AlertDialogAction,
-} from '../ui/alert-dialog'
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { FileEdit } from 'lucide-react'
 import { Input } from '../ui/Input'
 
-const EditAssessmentsAlertdialog = () => {
+const EditAssessmentsAlertdialog: React.FC<{ lessonId: string }> = ({ lessonId }) => {
+  const [question, setQuestion] = useState('');
+  const [choices, setChoices] = useState(['', '', '', '']);
+  const [correctAnswer, setCorrectAnswer] = useState('');
+
+  const handleAdd = async () => {
+    try {
+      const response = await fetch('/api/assessment/question', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: lessonId+'question',
+          text: question,
+          lessonId: lessonId,
+          choices: choices.map((choice) => ({
+          text: choice,
+          value: choice === correctAnswer ? 1 : 0,
+          })),
+        }),
+      });
+
+      console.log('Response:', response);
+      if (response.ok) {
+        console.log('Question added successfully');
+        window.location.reload();
+      } else {
+        console.error('Failed to add question');
+      }
+    } catch (error) {
+      console.error('Error in adding question: ', error);
+    }
+  };
+
   return (
     <>
       <AlertDialog>
@@ -25,14 +56,40 @@ const EditAssessmentsAlertdialog = () => {
           <AlertDialogHeader className="flex justify-center items-center mb-6">
             <AlertDialogTitle className="mb-6">Edit Question</AlertDialogTitle>
             <AlertDialogDescription>
-              <Input placeholder="Lesson no." className="mb-3"></Input>
-              <Input placeholder="Title" className="mb-3"></Input>
-              <Input placeholder="File"></Input>
+              <Input
+                placeholder="Question"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                className="mb-3"
+              />
+              Choices:
+              {choices.map((choice, index) => (
+                <Input
+                  key={index}
+                  placeholder={`Choice ${index + 1}`}
+                  value={choice}
+                  onChange={(e) => {
+                    const updatedChoices = [...choices];
+                    updatedChoices[index] = e.target.value;
+                    setChoices(updatedChoices);
+                  }}
+                  className="ml-7 mt-2 mb-3"
+                />
+              ))}
+              <Input
+                placeholder="Correct Answer"
+                value={correctAnswer}
+                onChange={(e) => setCorrectAnswer(e.target.value)}
+                className="mt-3"
+              />
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 flex items-center rounded-md text-sm">
+            <AlertDialogAction
+              onClick={handleAdd}
+              className="bg-transparent text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 flex items-center rounded-md text-sm"
+            >
               <FileEdit className="h-4" />
               Edit
             </AlertDialogAction>
@@ -40,7 +97,7 @@ const EditAssessmentsAlertdialog = () => {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
-}
+  );
+};
 
-export default EditAssessmentsAlertdialog
+export default EditAssessmentsAlertdialog;

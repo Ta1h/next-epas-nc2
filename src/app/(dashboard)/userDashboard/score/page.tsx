@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Table,
   TableBody,
@@ -9,60 +9,76 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Unit } from '@/types/data';
+import { useSession } from 'next-auth/react';
 
 const page = () => {
+  const [data, setData] = useState<Array<Unit>>([])
+  const session = useSession()
+  const userEmail = session.data?.user.email;
+
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/units', {
+        method: 'GET',
+      })
+
+      console.log(response)
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      } 
+        const body = await response.json()
+        setData(body)
+        console.log("status",response.ok)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  },[])
 
 
   return (
-    <div className="grid grid-cols-4 px-16 py-12 gap-10">
-      <div className='p-5 col-span-1 rounded-md w-72 shadow-[0px_3px_8px_0px_#00000024]'>
-        <h1 className='mb-3 font-medium text-gray-500'>OVERALL SCORE</h1>
-        <div className='grid lg:grid-cols-3'>
-          <div className='flex-row justify-center col-span-2'>
-            <h1 className='text-xl font-bold flex justify-center'>115</h1>
-            <p className='text-sm font-medium flex justify-center text-gray-500'>EXCELLENT</p>
-          </div> 
-          <div className='text-xs'>
-            <p className='font-medium text-gray-500'>MAX SCORE</p>
-            <h1 className='font-bold'>140</h1>
-          </div>
-        </div>
-      </div>
-
-      <div className='col-span-3 rounded-lg'>
+    <div className="w-full grid grid-cols-2 p-10 gap-y-10">
+      <div className=' col-span-2 rounded-lg'>
+        
         <Table>
-          <TableCaption>List of assessment scores</TableCaption>
+          <TableCaption className='text-md'>List of assessment scores</TableCaption>
           <TableHeader className='bg-black text-white rounded-md'>
             <TableRow>
-              <TableHead className="w-[100px]">Email</TableHead>
-              <TableHead className="w-[100px]">Score</TableHead>
+              <TableHead>Unit</TableHead>
               <TableHead>Lesson</TableHead>
-              <TableHead className="w-[100px]">Time</TableHead>
-              <TableHead className="w-[100px]">Date</TableHead>
+              <TableHead className="w-[140px]">Pre-Test Score</TableHead>
+              <TableHead className="w-[140px]">Post-Test Score</TableHead>
+              <TableHead className="w-[110px]">Time</TableHead>
+              <TableHead className="w-[110px]">Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell >ralphtaoc071@gmail.com</TableCell>
-              <TableCell>5/5</TableCell>
-              <TableCell>Lesson 1: OH&S POLICIES AND PROCEDURES</TableCell>
-              <TableCell>4:17 pm</TableCell>
-              <TableCell>17/11/203</TableCell>
-            </TableRow>
+            {data.map((unit) => (
+              unit.lessons.map((lesson) => {
+                const matchingScores = unit.score.filter((score) => (
+                  score.userEmail === userEmail && score.lessonId === lesson.id
+                ));
+
+                return matchingScores.map((scores) => (
+                  <TableRow key={scores.id}>
+                    <TableCell>{unit.unitNumber} {unit.unitTitle}</TableCell>
+                    <TableCell>{lesson.lessonNumber} {lesson.lessonTitle}</TableCell>
+                    <TableCell>{scores.preTestScore}/{scores.preTestLenght}</TableCell>
+                    <TableCell>{scores.lessonScore}/{scores.lessonLength}</TableCell>
+                    <TableCell>{new Date(scores.date).toLocaleTimeString()}</TableCell>
+                    <TableCell>{new Date(scores.date).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ));
+              })
+            ))}
           </TableBody>
         </Table>
-      </div>
-      
-
-      <div className='p-5 ml-14 rounded-md  shadow-[0px_3px_8px_0px_#00000024]'>
-        <h1 className='mb-3'>UNIT SCORES</h1> 
-        <div className='grid lg:grid-cols-3'>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-        </div>
-      </div>
-    
+      </div>    
     </div>
   )
 }

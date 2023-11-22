@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const questions = await prisma.question.create({
       data: {
+        id: body.id,
         text: body.text,
         lessonId: body.lessonId,
         choices: {

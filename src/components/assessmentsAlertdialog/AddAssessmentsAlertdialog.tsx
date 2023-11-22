@@ -23,12 +23,13 @@ const AddAssessmentsAlertdialog: React.FC<{ lessonId: string }> = ({ lessonId })
       const response = await fetch('/api/assessment/question', {
         method: 'POST',
         body: JSON.stringify({
+          id: lessonId+'question',
           text: question,
           lessonId: lessonId,
           choices: choices.map((choice) => ({
           text: choice,
           value: choice === correctAnswer ? 1 : 0,
-        })),
+          })),
         }),
       });
 
@@ -65,7 +66,7 @@ const AddAssessmentsAlertdialog: React.FC<{ lessonId: string }> = ({ lessonId })
               {choices.map((choice, index) => (
                 <Input
                   key={index}
-                  placeholder={`Answer ${index + 1}`}
+                  placeholder={`Choice ${index + 1}`}
                   value={choice}
                   onChange={(e) => {
                     const updatedChoices = [...choices];

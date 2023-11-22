@@ -49,7 +49,7 @@ const Page: FC<Props> = ({ params }) => {
         className="flex text-sm text-gray-500"
       >
         <ChevronLeft className="h-5" />
-        <h1>Lesson | Pre-Test | Unit</h1>
+        <h1>Lesson Section | Unit</h1>
       </Link>
       <div className="flex ml-2">
         <h1 className="font-semibold w-full text-xl">
@@ -60,13 +60,17 @@ const Page: FC<Props> = ({ params }) => {
       <div className='h-auto transform scale-90'>
         {lesson.map((lessons) => (
           <div key={lessons.id}>
-            <iframe
-              width="1200"
-              height="590"
-              src={lessons.lessonUrl}
-              frameBorder="i"
-              allowFullScreen
-            />
+            {lessons.id === lessonId[0] && (
+              <div>
+                <iframe
+                  width="1200"
+                  height="590"
+                  src={lessons.lessonUrl}
+                  frameBorder="i"
+                  allowFullScreen
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

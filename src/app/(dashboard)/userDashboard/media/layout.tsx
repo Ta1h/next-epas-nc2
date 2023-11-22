@@ -21,14 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <Provider>
-        <body className="relative h-screen">
+        <body className="relative h-full">
           <aside className="z-80 hidden h-screen bg-white md:fixed md:inset-y-0 md:flex md:w-20 md:flex-col lg:w-56">
             <UserSidebar />
           </aside>
           <nav className="lg:ml-56">
             <UserNavbar />
           </nav>
-          <main className="bg-background md:ml-20 lg:ml-56">{children}</main>
+          <main className="scroll-container overflow-y-auto bg-background md:ml-20 lg:ml-56">{children}</main>
         </body>
       </Provider>
     </html>

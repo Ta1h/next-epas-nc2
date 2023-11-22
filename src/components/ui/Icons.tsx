@@ -1,4 +1,5 @@
 import {
+  BookOpen,
   Award,
   Presentation,
   ThumbsUp,
@@ -24,6 +25,7 @@ import {
 } from 'lucide-react'
 
 export const Icons = {
+  BookOpen,
   Award,
   Presentation,
   ThumbsUp,

@@ -5,7 +5,7 @@ interface SectionAboutProps {}
 
 const SectionAbout: FC<SectionAboutProps> = () => {
   return (
-    <div id="about" className="w-full h-screen">
+    <div id="about" className="w-full h-80 bg-[#5C259C]">
       SectionAbout
     </div>
   )

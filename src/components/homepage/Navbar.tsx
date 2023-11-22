@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -9,32 +8,6 @@ import { Button } from '@/components/ui/Button'
 import ScrollLink from '@/components/ui/ScrollLink'
 
 const Navbar = () => {
-  const [, setShow] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-
-  const controlNavbar = () => {
-    if (typeof window !== 'undefined') {
-      if (window.scrollY > lastScrollY) {
-        // if scroll down hide the navbar
-        setShow(false)
-      } else {
-        // if scroll up show the navbar
-        setShow(true)
-      }
-      // remember current page location to use in the next move
-      setLastScrollY(window.scrollY)
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar)
-      // cleanup function
-      return () => {
-        window.removeEventListener('scroll', controlNavbar)
-      }
-    }
-  }, [controlNavbar, lastScrollY])
 
   return (
     <div className="flex justify-between my-5 mx-7 md:mx-9 lg:mx-8 xl:mx-20 xl:mt-8 2xl:mx-24 2xl:mt-9">

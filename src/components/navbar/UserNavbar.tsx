@@ -30,7 +30,7 @@ const UserNavbar = async () => {
               width={100}
               height={100}
               alt=""
-              className="w-10 h-10 rounded-xl border"
+              className="w-10 h-9 rounded-xl border"
             />
           ) : (
             <img
@@ -38,7 +38,7 @@ const UserNavbar = async () => {
               width={100}
               height={100}
               alt=""
-              className="w-10 h-10 rounded-xl border"
+              className="w-10 h-9 rounded-xl border"
             />
           )}
           <div className="hidden lg:flex justify-between items-center ml-2">

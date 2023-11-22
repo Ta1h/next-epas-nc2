@@ -10,9 +10,9 @@ export default function Home() {
     <>
       <header>
         <Navbar />
-        <Hero />
       </header>
-      <main>
+      <main className='h-full'>
+        <Hero />
         <SectionPrograms />
         <SectionAbout />
         <SectionContacts />

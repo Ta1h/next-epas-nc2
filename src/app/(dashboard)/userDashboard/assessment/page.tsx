@@ -36,7 +36,7 @@ const assessment = () => {
     <main className="px-10 pt-6">
       <div className="grid lg:grid-cols-4 gap-16">
         <div className='col-span-2 flex justify-center items-center'>
-          <div className='gap-x-8 flex-cols grid lg:grid-cols-2 px-10 py-10 h-full bg-[#A663CC] text-[#B8D0EB] indent-1 rounded-xl'>
+          <div className='gap-x-8 flex-cols grid lg:grid-cols-2 px-10 py-10 h-full bg-[#6F2DBD] text-[#B8D0EB] indent-1 rounded-xl'>
             <h1 className='font-black text-2xl tracking-wider col-span-2 mb-5'>Guidelines & Notice!</h1>
             <Image
               priority
