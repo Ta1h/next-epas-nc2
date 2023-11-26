@@ -37,7 +37,7 @@ const AddAlertdialog: React.FC<{ unitId: string }> = ({ unitId }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/lessons', {
+      const response = await fetch('/api/lessons', {
         method: 'POST',
         body: JSON.stringify({
           lessonNumber: formData.lessonNumber,

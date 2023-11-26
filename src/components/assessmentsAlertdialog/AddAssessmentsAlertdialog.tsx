@@ -23,7 +23,6 @@ const AddAssessmentsAlertdialog: React.FC<{ lessonId: string }> = ({ lessonId })
       const response = await fetch('/api/assessment/question', {
         method: 'POST',
         body: JSON.stringify({
-          id: lessonId+'question',
           text: question,
           lessonId: lessonId,
           choices: choices.map((choice) => ({

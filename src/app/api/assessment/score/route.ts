@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const scores = await prisma.score.findMany();
+    const scores = await prisma.score.findMany({
+      include: {
+        user: true
+      }
+    });
     if (!scores || scores.length === 0) {
       return NextResponse.json({ message: "No scores found" }, { status: 404 });
     }

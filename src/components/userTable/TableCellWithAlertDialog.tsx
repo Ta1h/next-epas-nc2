@@ -22,7 +22,7 @@ export function TableCellWithAlertDialog({
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        'http://localhost:3000/api/users/id/' + deletedRow,
+        '/api/users/id/' + deletedRow,
         {
           method: 'DELETE',
         },

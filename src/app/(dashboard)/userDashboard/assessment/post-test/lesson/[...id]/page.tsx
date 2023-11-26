@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import SubmitAssessmentsAlertdialog from '@/components/assessmentsAlertdialog/SubmitAssessmentsAlertdialog'
 import RetakeAssessmentsAlertdialog from '@/components/assessmentsAlertdialog/RetakeAssessmentsAlertdialog'
-
+import { useSession } from 'next-auth/react'
 
 interface Props {
   params: { id: string }
@@ -24,8 +24,16 @@ const Page: FC<Props> = ({ params }) => {
   const [quizSubmitted, setQuizSubmitted] = useState(false)
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const [retakeClicked, setRetakeClicked] = useState(false);
+  const [isUserEmailInScoreData, setIsUserEmailInScoreData] = useState(false);
   const lessonId = params.id
+  const session = useSession()
+  const userEmail = session.data?.user.email;
 
+  console.log(userEmail)
+  console.log(isUserEmailInScoreData)
+  console.log(lessonId[0])
+  //console.log(isUserEmailInScoreData)
+  
   function shuffleArray(array: Choice[]) {
     const shuffledArray = [...array]
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -42,6 +50,7 @@ const Page: FC<Props> = ({ params }) => {
     lessonId: string;
     lessonScore: number;
     lessonLength: number;
+    userEmail: string;
   }
 
   useEffect(() => {
@@ -54,15 +63,17 @@ const Page: FC<Props> = ({ params }) => {
         if (scoreResponse.ok) {
           const scoreDataArray: ScoreData[] = await scoreResponse.json();
   
-          // Assuming lessonId[0] is the lesson ID you're interested in
           const lessonScoreData = scoreDataArray.find(
             (scoreData) => scoreData.lessonId === lessonId[0]
           );
-  
+
+          const scoreUserEmail = userEmail == lessonScoreData?.userEmail 
+
           if (lessonScoreData && lessonScoreData.lessonScore !== undefined) {
             setQuizSubmitted(true);
             setScore(lessonScoreData.lessonScore);
             setLessonLength(lessonScoreData.lessonLength);
+            setIsUserEmailInScoreData(scoreUserEmail);
           } else {
             console.log('No lessonScore found in the response for the specified lesson.');
           }
@@ -374,7 +385,7 @@ const Page: FC<Props> = ({ params }) => {
               </div>
             </div>
           </div>
-        ) : quizSubmitted ? (
+        ) : quizSubmitted && isUserEmailInScoreData ? (
           <div className="flex-col mx-60 p-10 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
             {(score >= scoreLength * 0.6 || retakeScore >= scoreLength * 0.6) && (score != 0 && scoreLength!= 0) ? (
               <div className="flex-col mb-5">
@@ -412,7 +423,7 @@ const Page: FC<Props> = ({ params }) => {
               </Button>
             </div>
           </div>
-        )  : retakeClicked && (
+        )  : retakeClicked && isUserEmailInScoreData && (
           <div
             key={questions[currentQuestionIndex].id}
             className="flex justify-center"

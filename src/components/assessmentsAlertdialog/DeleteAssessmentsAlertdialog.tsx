@@ -1,5 +1,5 @@
 import { FileX2 } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   AlertDialogHeader,
   AlertDialogFooter,
@@ -13,6 +13,31 @@ import {
 } from '../ui/alert-dialog'
 
 const DeleteAssessmentsAlertdialog = () => {
+  const [isDeleting, setIsDeleting] = useState(false); 
+
+  console.log(isDeleting)
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/lessons/id`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+
+        console.log('Lesson deleted successfully');
+        window.location.reload();
+      } else {
+        console.error('Error deleting lesson');
+      }
+    } catch (error) {
+      console.error('Error deleting lesson: ', error);
+    } finally {
+
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <>
       <AlertDialog>

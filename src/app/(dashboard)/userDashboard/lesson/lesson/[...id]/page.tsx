@@ -36,7 +36,7 @@ const Page: FC<Props> = ({ params }) => {
   }, [])
 
   return (
-    <div className="px-10 pt-6 h-auto bg-gray-50">
+    <div className="px-10 pt-6 h-auto bg-purple-600">
       <Link
         href={
           '/userDashboard/lesson/unit/' +
@@ -46,7 +46,7 @@ const Page: FC<Props> = ({ params }) => {
           '/' +
           lessonId[5]
         }
-        className="flex text-sm text-gray-500"
+        className="flex text-sm text-black"
       >
         <ChevronLeft className="h-5" />
         <h1>Lesson Section | Unit</h1>
@@ -61,13 +61,13 @@ const Page: FC<Props> = ({ params }) => {
         {lesson.map((lessons) => (
           <div key={lessons.id}>
             {lessons.id === lessonId[0] && (
-              <div>
+              <div className='w-full flex justify-center'>
                 <iframe
-                  width="1200"
+                  width="1300"
                   height="590"
                   src={lessons.lessonUrl}
-                  frameBorder="i"
                   allowFullScreen
+                  className='rounded-xl font-medium'
                 />
               </div>
             )}

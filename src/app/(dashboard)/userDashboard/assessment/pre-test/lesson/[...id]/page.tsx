@@ -25,9 +25,13 @@ const Page: FC<Props> = ({ params }) => {
   const [quizSubmitted, setQuizSubmitted] = useState(false)
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const [retakeClicked, setRetakeClicked] = useState(false);
+  const [isUserEmailInScoreData, setIsUserEmailInScoreData] = useState(false);
   const lessonId = params.id
   const session = useSession();
   const userEmail = session.data?.user.email;
+
+  // console.log(userEmail)
+  // console.log(isUserEmailInScoreData)
 
   function shuffleArray(array: Choice[]) {
     const shuffledArray = [...array]
@@ -45,6 +49,7 @@ const Page: FC<Props> = ({ params }) => {
     lessonId: string;
     preTestScore: number;
     preTestLenght: number;
+    userEmail: string;
   }
 
   useEffect(() => {
@@ -53,22 +58,41 @@ const Page: FC<Props> = ({ params }) => {
         const scoreResponse = await fetch(`/api/assessment/score`, {
           method: 'GET',
         });
-  
+        
         if (scoreResponse.ok) {
           const scoreDataArray: ScoreData[] = await scoreResponse.json();
   
-          // Assuming lessonId[0] is the lesson ID you're interested in
+          
           const preTestScoreData = scoreDataArray.find(
             (scoreData) => scoreData.lessonId === lessonId[0]
           );
+
+          console.log(preTestScoreData?.userEmail)
+          console.log(userEmail)
+
+          const doesUserEmailExist = scoreDataArray.some((score) => score.userEmail === userEmail);
+          
+          console.log(doesUserEmailExist)
+
+          if (doesUserEmailExist) {
+            const matchingScore = scoreDataArray.find((score) => score.userEmail === userEmail);
+
+            if (preTestScoreData && preTestScoreData.preTestScore !== undefined && matchingScore) {
+              const matchingUserEmail = matchingScore.userEmail;
+              console.log('Matching userEmail:', matchingUserEmail);
+              setIsUserEmailInScoreData(true);
   
-          if (preTestScoreData && preTestScoreData.preTestScore !== undefined) {
-            setQuizSubmitted(true);
-            setScore(preTestScoreData.preTestScore);
-            setpreTestLenght(preTestScoreData.preTestLenght);
+              setQuizSubmitted(true);
+              setScore(preTestScoreData.preTestScore);
+              setpreTestLenght(preTestScoreData.preTestLenght);
+            } else {
+              console.log('No preTestScore found in the response for the specified lesson.');
+            }
           } else {
-            console.log('No preTestScore found in the response for the specified lesson.');
+            console.log('No matching userEmail found in scoreDataArray.');
           }
+
+          
         } else {
           console.log('Failed to fetch score data. Status:', scoreResponse.status);
         }
@@ -221,7 +245,7 @@ const Page: FC<Props> = ({ params }) => {
   const retakeQuiz = async () => {
     try {
       let retakeScore = 0;
-      const scoreId = lessonId[3]+lessonId[0];
+      const scoreId = lessonId[3]+userEmail;
 
       console.log('before map: ',retakeScore);
 
@@ -292,7 +316,7 @@ const Page: FC<Props> = ({ params }) => {
       </div>
 
       <div className="w-full">
-        {quizSubmitted ? (
+        {quizSubmitted && isUserEmailInScoreData ? (
           <div className="flex-col mx-60 p-10 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
             {score >= scoreLength * 0.6 || retakeScore >= scoreLength * 0.6 ? (
               <div className="flex-col mb-5">
@@ -328,7 +352,7 @@ const Page: FC<Props> = ({ params }) => {
               </Button>
             </div>
           </div>
-        )  : retakeClicked ? (
+        )  : retakeClicked && isUserEmailInScoreData ? (
           <div
             key={questions[currentQuestionIndex].id}
             className="flex justify-center"

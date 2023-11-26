@@ -1,6 +1,5 @@
 import { withAuth, NextRequestWithAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server';
-import { env } from 'process';
 
 export default withAuth(
     function middleware(req: NextRequestWithAuth){

@@ -1,7 +1,7 @@
 import React from 'react'
 import Provider from '@/components/Provider'
-import UserSidebar from '@/components/sidebar/UserSidebar'
-import UserNavbar from '@/components/navbar/UserNavbar'
+import AdminSidebar from '@/components/sidebar/AdminSidebar'
+import AdminNavbar from '@/components/navbar/AdminNavbar'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -21,14 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <Provider>
-        <body className="relative h-screen">
-          <aside className="z-80 hidden h-screen bg-white md:fixed md:inset-y-0 md:flex md:w-20 md:flex-col lg:w-56">
-            <UserSidebar />
+        <body className="relative">
+          <aside className="z-80 hidden h-full bg-white md:fixed md:inset-y-0 md:flex md:w-20 md:flex-col lg:w-60">
+            <AdminSidebar />
           </aside>
-          <nav className="lg:ml-56">
-            <UserNavbar />
+          <nav>
+            <AdminNavbar />
           </nav>
-          <main className="bg-background md:ml-20 lg:ml-56">{children}</main>
+          <main className="h-screen bg-background pb-24 md:pl-20 lg:pl-60">
+            {children}
+          </main>
         </body>
       </Provider>
     </html>
