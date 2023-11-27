@@ -33,6 +33,7 @@ export async function PATCH(req: Request) {
     const updateScore = await prisma.score.update({
       where: { id: body.id },
       data: {
+        preTestScore: body.preTestScore,
         lessonScore: body.lessonScore,
         lessonLength: body.lessonLength,
       },

@@ -58,7 +58,7 @@ const Page = () => {
                   (score) =>
                     score.userEmail === userEmail &&
                     score.lessonId === lesson.id &&
-                    score.lessonScore < 0.6 * score.lessonLength
+                    score.preTestScore < 0.6 * score.preTestLenght
                 )
               )
               .map((lesson) => (
@@ -73,7 +73,7 @@ const Page = () => {
                     .slice(0, 1) 
                     .map((latestScore) => (
                       <div key={latestScore.id} className='h-full'>
-                        {latestScore.lessonScore < 0.6 * latestScore.lessonLength && (
+                        {latestScore.preTestScore < 0.6 * latestScore.preTestLenght && (
                           <div className='grid grid-row-5 h-full '>
                             <div className='grid row-span-4 grid-cols-6 justify-between w-full h-full'>
                               <div className='col-span-4 '>
@@ -103,7 +103,7 @@ const Page = () => {
                               <p>Score: </p>
                               <p>Time: </p>
                               <p>Date: </p>
-                              <p>{latestScore.lessonScore} / {latestScore.lessonLength}</p>
+                              <p>{latestScore.preTestScore} / {latestScore.preTestLenght}</p>
                               <p>{new Date(latestScore.date).toLocaleTimeString()}</p>
                               <p>{new Date(latestScore.date).toLocaleDateString()}</p>
                             </div>

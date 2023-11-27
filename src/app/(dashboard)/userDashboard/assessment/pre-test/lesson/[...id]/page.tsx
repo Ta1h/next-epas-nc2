@@ -245,7 +245,7 @@ const Page: FC<Props> = ({ params }) => {
   const retakeQuiz = async () => {
     try {
       let retakeScore = 0;
-      const scoreId = lessonId[3]+userEmail;
+      const scoreId = lessonId[3]+lessonId[0];
 
       console.log('before map: ',retakeScore);
 
