@@ -5,7 +5,8 @@ export async function GET() {
   try {
     const lessons = await prisma.lesson.findMany({
       include: {
-        score: true
+        score: true,
+        questions: true,
       }
     });
     if (!lessons || lessons.length === 0) {

@@ -23,6 +23,8 @@ export type Lesson = {
   lessonTitle: string;
   lessonUrl: string;
   unitId: string;
+  score: Score[];
+  questions: Question[];
 };
   
 export type Choice = {
