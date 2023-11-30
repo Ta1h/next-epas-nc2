@@ -1,5 +1,5 @@
 'use client'
-import { Choice, Question } from '@/types/data'
+import { Choice, Lesson, Question } from '@/types/data'
 import React, { FC, useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
@@ -7,17 +7,18 @@ import { Button } from '@/components/ui/Button'
 import SubmitAssessmentsAlertdialog from '@/components/assessmentsAlertdialog/SubmitAssessmentsAlertdialog'
 import RetakeAssessmentsAlertdialog from '@/components/assessmentsAlertdialog/RetakeAssessmentsAlertdialog'
 import { useSession } from 'next-auth/react'
-
+import { error } from 'console'
 
 interface Props {
   params: { id: string }
 }
 
 const Page: FC<Props> = ({ params }) => {
+  const lessonId = params.id
   const [questions, setQuestions] = useState<Array<Question>>([])
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({})
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(0);
   const [retakeScore, setRetakeScore] = useState(0);
   const [scoreLength, setpreTestLenght] = useState(0)
   const [answerSelected, setAnswerSelected] = useState(false)
@@ -26,21 +27,19 @@ const Page: FC<Props> = ({ params }) => {
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const [retakeClicked, setRetakeClicked] = useState(false);
   const [isUserEmailInScoreData, setIsUserEmailInScoreData] = useState(false);
-  const lessonId = params.id
+  const [lessons, setLessons] = useState<Array<Lesson>>([])
+  const selectedLesson: Lesson[] = lessons.filter((lesson) => lesson.unitId === lessonId[0]);
   const session = useSession();
   const userEmail = session.data?.user.email;
-
-  // console.log(userEmail)
-  // console.log(isUserEmailInScoreData)
+  
+  console.log(selectedLesson)
 
   function shuffleArray(array: Choice[]) {
     const shuffledArray = [...array]
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ]
+      ;[shuffledArray[i], shuffledArray[j]]
+       = [ shuffledArray[j], shuffledArray[i]]
     }
     return shuffledArray
   }
@@ -83,7 +82,7 @@ const Page: FC<Props> = ({ params }) => {
               setIsUserEmailInScoreData(true);
   
               setQuizSubmitted(true);
-              setScore(preTestScoreData.preTestScore);
+              setScore(preTestScoreData.preTestScore);              
               setpreTestLenght(preTestScoreData.preTestLenght);
             } else {
               console.log('No preTestScore found in the response for the specified lesson.');
@@ -96,6 +95,20 @@ const Page: FC<Props> = ({ params }) => {
         } else {
           console.log('Failed to fetch score data. Status:', scoreResponse.status);
         }
+
+        const response = await fetch('/api/lessons', {
+          method: 'GET',
+        })
+        if (response.ok) {
+          const data = await response.json()
+          console.log(data)
+          setLessons(data)
+        } else if (response.status === 404) {
+          console.log('No units found')
+        } else {
+          console.error('Something went wrong')
+        }
+
       } catch (error) {
         console.error('Error:', error);
       }
@@ -115,10 +128,10 @@ const Page: FC<Props> = ({ params }) => {
           const data = await response.json();
           if (data.length > 0) {
             const filteredQuestions = data.filter(
-              (question: Question) => question.lessonId === lessonId[0]
+              (question: Question) => question.lesson.unitId === lessonId[0]
             );
             console.log('Fetched Questions:', filteredQuestions);
-            setQuestions(filteredQuestions);
+            setQuestions(filteredQuestions)
           } else {
             console.log('No questions found');
           }
@@ -157,12 +170,20 @@ const Page: FC<Props> = ({ params }) => {
   }
 
   const handleAnswerClick = (selectedAnswer: string) => {
+    const currentQuestion = questions[currentQuestionIndex];
+
     setUserAnswers({
       ...userAnswers,
-      [questions[currentQuestionIndex].id]: selectedAnswer,
-    })
+      [currentQuestion.id]: selectedAnswer,
+    });
 
-    setAnswerSelected(true)
+    const selectedChoice = currentQuestion.choices.find((choice) => choice.id === selectedAnswer);
+
+    if (selectedChoice && selectedChoice.value === 1) {
+      setScore((prevScore) => prevScore + 1);
+    }
+
+    setAnswerSelected(true);
   }
 
   useEffect(() => {
@@ -177,12 +198,11 @@ const Page: FC<Props> = ({ params }) => {
           const response = await fetch('/api/assessment/score', {
             method: 'POST',
             body: JSON.stringify({
-              id: lessonId[3]+lessonId[0],
               preTestScore: score,
               preTestLenght: scoreLength,
               userEmail: userEmail,
-              unitId: lessonId[3],
-              lessonId: lessonId[0],
+              unitId: lessonId[0],
+              lessonId: questions.length > 0 ? questions[2].lessonId : null,
             }),
           })
 
@@ -202,35 +222,45 @@ const Page: FC<Props> = ({ params }) => {
   }, [score, scoreSubmitted])
 
   const submitTest = async () => {
-    let finalScore = 0;
+    try {
+      // Process each lesson separately
+      selectedLesson.forEach(async (lesson) => {
+        const lessonQuestions = questions.filter((question) => question.lessonId === lesson.id);
   
-    questions.forEach((question) => {
-      const selectedQuestionId = question.id;
-      const selectedChoiceId = userAnswers[selectedQuestionId];
-  
-      if (selectedChoiceId) {
-        const selectedChoice = question.choices.find(
-          (choice) => choice.id === selectedChoiceId
-        );
-  
-        if (selectedChoice) {
-          finalScore += selectedChoice.value;
-        }
-      }
-    });
-  
-    // Update scoreLength if needed
-    const totalPossibleScore = questions.reduce(
-      (total, question) => total + Math.max(...question.choices.map(c => c.value)),
-      0
-    );
-  
-    setScore(finalScore);
-    setpreTestLenght(totalPossibleScore);
-    setScoreSubmitted(true);
-    console.log('Final Score: ', finalScore + '/' + totalPossibleScore);
-  };  
+        const payloadArray = lessonQuestions
+          .slice(0, 1) // Take only the first item
+          .map((question) => ({
+            preTestScore: score,
+            preTestLength: lessonQuestions.length,
+            lessonScore: 0,
+            lessonLength: 0,
+            userEmail: userEmail,
+            unitId: lesson.unitId,
+            lessonId: question.lessonId,
+          }));
 
+  
+        console.log(`Generated Payload for Lesson ${lesson.id}:`, payloadArray);
+  
+        const response = await fetch('/api/assessment/score', {
+          method: 'POST',
+          body: JSON.stringify(payloadArray),
+        });
+  
+        if (response.ok) {
+          console.log('Score submitted successfully');
+          setScoreSubmitted(true);
+        } else{
+          const errorData = await response.json().catch(() => ({}));
+          console.error('Failed to submit score:', errorData.message || 'Unknown error');
+        }
+        
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+        
   useEffect(() => {
     console.log('Component re-rendered after retakeClicked change:', retakeClicked);
     if (retakeClicked) {
@@ -296,23 +326,21 @@ const Page: FC<Props> = ({ params }) => {
     <div className="px-10 pt-6 h-full">
       <Link
         href={
-          '/userDashboard/assessment/pre-test/unit/' +
-          lessonId[3] +
-          '/' +
-          lessonId[4] +
-          '/' +
-          lessonId[5]
+          '/userDashboard/assessment/preTest'
         }
         className="flex text-sm text-gray-500"
       >
         <ChevronLeft className="h-5" />
         <h1>Assessment | Pre-Test</h1>
       </Link>
-      <div className="flex mb-12 ml-2">
+      <div className="flex mb-6 ml-2">
         <h1 className="font-semibold w-full text-xl">
           {decodeURIComponent(lessonId[1])}
           {decodeURIComponent(lessonId[2])}
         </h1>
+      </div>
+      <div className='mb-6 flex justify-center'>
+        <h1>Question {currentQuestionIndex+1} of {questions.length}</h1>
       </div>
 
       <div className="w-full">

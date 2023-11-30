@@ -90,11 +90,11 @@ const Page = () => {
                                   Lesson
                                 </Link>
                                 <Link 
-                                  href={'/userDashboard/assessment/post-test/lesson/'+lesson.id+'/'+lesson.lessonNumber+'/'+lesson.lessonTitle+'/'+unit.id+'/'+unit.unitNumber+'/'+unit.unitTitle}
+                                  href={'/userDashboard/assessment/pre-test/lesson/'+lesson.id+'/'+lesson.lessonNumber+'/'+lesson.lessonTitle+'/'+unit.id+'/'+unit.unitNumber+'/'+unit.unitTitle}
                                   className='flex w-fit h-fit font-medium hover:text-[#6F2DBD] underline-offset-4 hover:underline transition-all origin-left duration-100'
                                   >
                                   <FileText className='w-4'/>
-                                  Post-Test
+                                  Pre-Test
                                 </Link>
                               </div>
                             </div>

@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState} from 'react'
 import { ChevronLeft} from 'lucide-react'
 import Link from 'next/link'
 import { Lesson } from '@prisma/client'
+import Image from 'next/image'
 
 
 interface Props {
@@ -46,25 +47,34 @@ const Page: FC<Props> = ({ params }) => {
           '/' +
           lessonId[5]
         }
-        className="flex text-sm text-black"
+        className="flex text-sm text-black mt-2"
       >
         <ChevronLeft className="h-5" />
         <h1>Lesson Section | Unit</h1>
       </Link>
-      <div className="flex ml-2">
+      <div className="flex ml-2 mt-2">
         <h1 className="font-semibold w-full text-xl">
           {decodeURIComponent(lessonId[1])}
           {decodeURIComponent(lessonId[2])}
         </h1>
       </div>
-      <div className='h-auto transform scale-90'>
+
+      <Image
+        priority
+        width="100"
+        height="100"
+        alt="Logo"
+        src={'/lesson background.svg'}
+        className='mx-auto w-max mt-28'
+      />
+      <div className='h-auto scale-90 absolute top-32 right-72 mr-1 mt-5'>
         {lesson.map((lessons) => (
           <div key={lessons.id}>
             {lessons.id === lessonId[0] && (
               <div className='w-full flex justify-center'>
                 <iframe
-                  width="1300"
-                  height="590"
+                  width="700"
+                  height="580"
                   src={lessons.lessonUrl}
                   allowFullScreen
                   className='rounded-xl font-medium'
