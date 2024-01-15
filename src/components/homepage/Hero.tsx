@@ -5,18 +5,9 @@ import Image from 'next/image'
 
 const Hero = () => {
   return (
-    <div className="flex flex-col w-full">
-      <div className='w-full'>
-        <Image
-          layout="responsive"
-          width={1540}
-          height={700}
-          src="Hero.svg"
-          alt="Hero Image"
-          className="w-auto hero-image hidden lg:block"
-        />
-      </div>
+    <div className="flex h-screen mx-8">
 
+      {/* Mobile View */}
       <div className=" flex h-80 w-screen lg:hidden ">
         <Image
           layout="intrinsic"
@@ -27,7 +18,8 @@ const Hero = () => {
         />
       </div>
 
-      <div className="hidden lg:block flex-col text-center lg:absolute lg:ml-10 lg:pt-48 lg:text-left lg:w-3/6 lg:h-3/6 lg:px-20 ">
+      {/* Text & Image */}
+      <div className="hidden text-center lg:flex lg:justify-center lg:items-start lg:flex-col   ">
         <h1 className="tracking-wider font-extrabold text-lg lg:text-2xl ">
           Electronic Product Assembly Servicing&apos;s Reviewer & Assessment
         </h1>
@@ -36,6 +28,8 @@ const Hero = () => {
           skill.
         </h2>
       </div>
+
+      
     </div>
   )
 }
