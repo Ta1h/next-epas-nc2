@@ -94,7 +94,7 @@ const Page = () => {
                                   className='flex w-fit h-fit font-medium hover:text-[#6F2DBD] underline-offset-4 hover:underline transition-all origin-left duration-100'
                                   >
                                   <FileText className='w-4'/>
-                                  Pre-Test
+                                  Retake
                                 </Link>
                               </div>
                             </div>

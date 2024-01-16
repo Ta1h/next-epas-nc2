@@ -319,38 +319,75 @@ const Page: FC<Props> = ({ params }) => {
         {quizSubmitted && isUserEmailInScoreData ? (
           <div className="flex-col mx-60 p-10 rounded-md shadow-[0px_3px_8px_0px_#00000024]">
             {score >= scoreLength * 0.6 || retakeScore >= scoreLength * 0.6 ? (
-              <div className="flex-col mb-5">
-                <h1 className="text-3xl font-semibold text-green-600">
-                  Congratulations!
-                </h1>
-                <p>
-                  You have passed the test, you can now move to the next test.
-                </p>
+              <div>
+                <div className="flex-col mb-5">
+                  <h1 className="text-3xl font-semibold text-green-600">
+                    Congratulations!
+                  </h1>
+                  <p>
+                    You have passed the test, you can now move to the next test.
+                  </p>
+                </div>
+                <div className="flex font-medium mb-10 text-lg">
+                  <h1 className="mr-1">Score:</h1>
+                  <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
+                    {retakeScore !== 0 ? retakeScore : score}
+                  </h1>
+                  <h2 className=" w-3 h-7 flex justify-center items-center">/</h2>
+                  <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
+                    {scoreLength}
+                  </h1>
+                </div>
+                <div className="flex justify-end space-x-3">
+                  <Button onClick={() => setRetakeClicked(true)} className="text-sm">
+                    Retake
+                  </Button>
+                  <Link href={
+                          '/userDashboard/assessment/post-test/lesson/' +
+                          lessonId[0] +
+                          '/' +
+                          lessonId[1] +
+                          '/' +
+                          lessonId[2] +
+                          '/' +
+                          lessonId[3] +
+                          '/' +
+                          lessonId[4] +
+                          '/' +
+                          lessonId[5]
+                        } 
+                  className="bg-green-600 text-white px-4 py-2 flex items-center text-sm rounded-md hover:text-green-600 hover:bg-white hover:border-2 hover:border-green-600">
+                    Take Post-Test 
+                    <ChevronRight/>
+                  </Link>
+                </div>
               </div>
             ) : (
-              <div className="flex-col mb-5">
-                <h1 className="text-3xl font-semibold text-red-600">Failed!</h1>
-                <p>
-                  Proceed to the recommendation, it&apos;s designed to help you for your Post-Test.
-                </p>
+              <div>
+                <div className="flex-col mb-5">
+                  <h1 className="text-3xl font-semibold text-red-600">Failed!</h1>
+                  <p>
+                    Proceed to the recommendation, it&apos;s designed to help you for your Post-Test.
+                  </p>
+                </div>
+                <div className="flex font-medium mb-10 text-lg">
+                  <h1 className="mr-1">Score:</h1>
+                  <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
+                    {retakeScore !== 0 ? retakeScore : score}
+                  </h1>
+                  <h2 className=" w-3 h-7 flex justify-center items-center">/</h2>
+                  <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
+                    {scoreLength}
+                  </h1>
+                </div>
+                <div className="flex justify-end space-x-3">
+                  <Button onClick={() => setRetakeClicked(true)} className="text-sm">
+                    Retake
+                  </Button>
+                </div>
               </div>
             )}
 
-            <div className="flex font-medium mb-10 text-lg">
-              <h1 className="mr-1">Score:</h1>
-              <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
-                {retakeScore !== 0 ? retakeScore : score}
-              </h1>
-              <h2 className=" w-3 h-7 flex justify-center items-center">/</h2>
-              <h1 className="w-10 h-7 flex justify-center items-center rounded-md bg-gray-300">
-                {scoreLength}
-              </h1>
-            </div>
-            <div className="flex justify-end">
-              <Button onClick={() => setRetakeClicked(true)} className="text-sm">
-                Retake
-              </Button>
-            </div>
           </div>
         )  : retakeClicked && isUserEmailInScoreData ? (
           <div
